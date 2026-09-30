@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adverbs of Frequency — Grammar Handout</title>
+<style>
+  :root{
+    --teal:#0d6e6e; --teal-deep:#094f4f; --gold:#d8a24a; --clay:#c46a4a;
+    --paper:#faf7f2; --ink:#1f2a2e; --muted:#5f6b6b; --line:#e6ded2;
+    --green:#2c6e49; --purple:#6d4c7d; --card:#ffffff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:var(--paper); color:var(--ink);
+    line-height:1.6; padding:0 18px 60px;
+  }
+  .sheet{max-width:820px; margin:0 auto;}
+
+  /* ---------- header ---------- */
+  header{padding:36px 0 18px; border-bottom:3px solid var(--gold); margin-bottom:26px;}
+  .program{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.72rem; font-weight:bold;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--clay); margin-bottom:10px;
+  }
+  h1{font-size:2.1rem; font-weight:normal; color:var(--teal-deep); line-height:1.15;}
+  .sub{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem; color:var(--muted); font-style:italic; margin-top:8px;}
+
+  /* ---------- sections ---------- */
+  section{margin-bottom:30px;}
+  h2{
+    font-size:1.32rem; font-weight:normal; color:var(--teal-deep);
+    margin-bottom:12px; padding-bottom:6px; border-bottom:1px solid var(--line);
+  }
+  h2 .num{color:var(--clay); font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem; font-weight:bold; margin-right:8px;}
+  h3{font-size:1.06rem; font-weight:normal; color:var(--clay); margin:20px 0 8px;}
+  p{margin-bottom:12px;}
+  .lead{color:var(--ink);}
+
+  /* ---------- examples ---------- */
+  ul.ex{list-style:none; margin:10px 0 14px;}
+  ul.ex li{
+    padding:6px 0 6px 20px; position:relative; line-height:1.55;
+  }
+  ul.ex li::before{
+    content:""; position:absolute; left:2px; top:15px;
+    width:7px; height:7px; border-radius:50%; background:var(--gold);
+  }
+  .hl{font-weight:bold; color:var(--teal);}
+  .hl-b{font-weight:bold; color:var(--clay);}
+  .hl-c{font-weight:bold; color:var(--purple);}
+  .note{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.86rem; color:var(--muted); font-style:italic;}
+
+  /* ---------- tables ---------- */
+  table{width:100%; border-collapse:collapse; margin:12px 0 16px; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.94rem;}
+  th{
+    background:var(--teal); color:#fff; text-align:left; font-weight:bold;
+    padding:9px 12px; border:1px solid var(--teal);
+  }
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tbody tr:nth-child(odd) td{background:#f6f1e9;}
+  tbody tr:nth-child(even) td{background:#fff;}
+  td.lab{font-weight:bold; color:var(--teal-deep); white-space:nowrap;}
+
+  /* ---------- frequency scale ---------- */
+  .scale{margin:14px 0 18px; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .scale-row{display:flex; align-items:stretch; border-bottom:1px solid var(--line); font-family:"Trebuchet MS",Arial,sans-serif;}
+  .scale-row:last-child{border-bottom:none;}
+  .scale-word{width:135px; padding:10px 14px; font-weight:bold; color:#fff; flex-shrink:0;}
+  .scale-pct{width:70px; padding:10px 8px; font-size:.86rem; color:var(--muted); text-align:center; flex-shrink:0; background:#f6f1e9;}
+  .scale-ex{padding:10px 14px; font-size:.93rem; background:#fff; flex:1;}
+
+  /* ---------- callouts ---------- */
+  .box{
+    background:#f6f1e9; border-left:4px solid var(--clay);
+    padding:14px 18px; margin:16px 0; border-radius:0 8px 8px 0;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.93rem; line-height:1.65;
+  }
+  .box.teal{border-left-color:var(--teal); background:#eef4f2;}
+  .box.green{border-left-color:var(--green); background:#eef4ef;}
+  .box .lbl{font-weight:bold; color:var(--clay); display:block; margin-bottom:5px; letter-spacing:.03em;}
+  .box.teal .lbl{color:var(--teal);}
+  .box.green .lbl{color:var(--green);}
+
+  /* ---------- correct / incorrect ---------- */
+  .pair{margin:10px 0 14px;}
+  .pair div{padding:6px 0 6px 124px; position:relative; line-height:1.55;}
+  .pair .tag{
+    position:absolute; left:0; top:8px; font-family:"Trebuchet MS",Arial,sans-serif;
+    font-size:.7rem; font-weight:bold; letter-spacing:.08em; text-transform:uppercase;
+    padding:2px 8px; border-radius:3px;
+  }
+  .pair .no .tag{background:#f6e2db; color:var(--clay);}
+  .pair .yes .tag{background:#e2efe7; color:var(--green);}
+  .pair .no{color:var(--muted);}
+
+  /* ---------- footer / sources ---------- */
+  .sources{margin-top:36px; padding-top:16px; border-top:2px solid var(--gold);}
+  .sources h2{border-bottom:none; margin-bottom:6px;}
+  .sources p.intro{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.86rem; color:var(--muted); font-style:italic; margin-bottom:12px;}
+  ol.srclist{list-style:none; counter-reset:s; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.82rem; line-height:1.6;}
+  ol.srclist li{counter-increment:s; padding:5px 0 5px 34px; position:relative;}
+  ol.srclist li::before{
+    content:"[" counter(s) "]"; position:absolute; left:0; top:5px;
+    font-weight:bold; color:var(--teal);
+  }
+  ol.srclist a{color:#1155cc; word-break:break-all;}
+  sup.ref{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.68rem; font-weight:bold; color:var(--teal); vertical-align:super;}
+  .closing{margin-top:30px; text-align:center; font-style:italic; color:var(--gold); font-size:1.02rem;}
+
+  /* ---------- print ---------- */
+  @media print{
+    body{background:#fff; padding:0; font-size:11pt;}
+    .sheet{max-width:100%;}
+    section{page-break-inside:avoid;}
+    table, .scale, .box{page-break-inside:avoid;}
+    ol.srclist a{color:#000; text-decoration:none;}
+  }
+  @media(max-width:560px){
+    h1{font-size:1.6rem;}
+    .scale-word{width:110px; font-size:.88rem;}
+    .scale-pct{width:52px; font-size:.78rem;}
+    .scale-ex{font-size:.86rem;}
+    .pair div{padding-left:0; padding-top:24px;}
+    .pair .tag{top:0;}
+    table{font-size:.86rem;}
+    th,td{padding:7px 9px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header>
+  <div class="program">Free English Program &middot; Grammar Handout</div>
+  <h1>Adverbs of Frequency</h1>
+  <div class="sub">Week 3 &mdash; Daily Life &amp; Time &nbsp;&middot;&nbsp; Saying how often something happens</div>
+</header>
+
+<section>
+  <h2><span class="num">1</span>What are adverbs of frequency?</h2>
+  <p class="lead">Adverbs of frequency tell us <strong>how often</strong> something happens. We use them very often with the present simple, to talk about habits and routines.<sup class="ref">[1]</sup></p>
+  <ul class="ex">
+    <li>I <span class="hl">always</span> drink tea in the morning.</li>
+    <li>She <span class="hl">never</span> eats meat.</li>
+    <li>We <span class="hl">usually</span> have class on Friday.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">2</span>The frequency scale</h2>
+  <p>These are the most common adverbs, from the most often to the least often.<sup class="ref">[1]</sup><sup class="ref">[2]</sup></p>
+
+  <div class="scale">
+    <div class="scale-row">
+      <div class="scale-word" style="background:#2c6e49;">always</div>
+      <div class="scale-pct">100%</div>
+      <div class="scale-ex">every time &mdash; <em>She always arrives early.</em></div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-word" style="background:#3f7f57;">usually</div>
+      <div class="scale-pct">about 90%</div>
+      <div class="scale-ex">most times &mdash; <em>I usually walk to work.</em></div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-word" style="background:#0d6e6e;">often</div>
+      <div class="scale-pct">about 70%</div>
+      <div class="scale-ex">many times &mdash; <em>We often cook together.</em></div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-word" style="background:#d8a24a; color:#3a2a10;">sometimes</div>
+      <div class="scale-pct">about 50%</div>
+      <div class="scale-ex">now and then &mdash; <em>He sometimes works late.</em></div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-word" style="background:#b8663f;">rarely / seldom</div>
+      <div class="scale-pct">about 10%</div>
+      <div class="scale-ex">almost never &mdash; <em>They rarely watch TV.</em></div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-word" style="background:#c46a4a;">never</div>
+      <div class="scale-pct">0%</div>
+      <div class="scale-ex">no times &mdash; <em>I never forget her birthday.</em></div>
+    </div>
+  </div>
+
+  <p class="note">You may also meet: <strong>occasionally</strong> (about 30%), <strong>frequently</strong> (about 70%), and <strong>hardly ever</strong> (about 5%).</p>
+</section>
+
+<section>
+  <h2><span class="num">3</span>Where does the adverb go?</h2>
+  <p>This is the most important rule in this handout. There are three situations, and they are easy once you see the pattern.<sup class="ref">[2]</sup><sup class="ref">[3]</sup></p>
+
+  <h3>Rule 1 &mdash; Before the main verb</h3>
+  <p>In simple tenses, the adverb goes <strong>between the subject and the main verb</strong>.</p>
+  <table>
+    <thead><tr><th style="width:26%">Subject</th><th style="width:26%">Adverb</th><th>Verb + rest</th></tr></thead>
+    <tbody>
+      <tr><td>She</td><td class="lab">always</td><td>drinks coffee in the morning.</td></tr>
+      <tr><td>They</td><td class="lab">never</td><td>eat meat.</td></tr>
+      <tr><td>My brother</td><td class="lab">usually</td><td>studies at night.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Rule 2 &mdash; After the verb <em>be</em></h3>
+  <p>When the verb is <strong>am, is, are, was, were</strong>, the adverb comes <strong>after</strong> it, not before.</p>
+  <table>
+    <thead><tr><th style="width:26%">Subject</th><th style="width:26%">be</th><th>Adverb + rest</th></tr></thead>
+    <tbody>
+      <tr><td>She</td><td class="lab">is</td><td><span class="hl-b">always</span> on time.</td></tr>
+      <tr><td>He</td><td class="lab">is</td><td><span class="hl-b">never</span> late.</td></tr>
+      <tr><td>They</td><td class="lab">are</td><td><span class="hl-b">usually</span> at home in the evening.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box">
+    <span class="lbl">Compare these two</span>
+    She <strong>always drinks</strong> tea. &nbsp;(main verb &rarr; adverb goes <em>before</em>)<br>
+    She <strong>is always</strong> tired. &nbsp;(the verb <em>be</em> &rarr; adverb goes <em>after</em>)
+  </div>
+
+  <h3>Rule 3 &mdash; After the first helping verb</h3>
+  <p>If there is a helping verb (<em>have, will, can, do</em>), the adverb goes <strong>after the first helping verb</strong> and before the main verb.</p>
+  <ul class="ex">
+    <li>I have <span class="hl">never</span> been to Kabul.</li>
+    <li>You can <span class="hl">always</span> ask me for help.</li>
+    <li>I will <span class="hl">never</span> forget your kindness.</li>
+    <li>We don't <span class="hl">usually</span> work on Friday.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">4</span>In negatives and questions</h2>
+
+  <h3>Negatives</h3>
+  <p>The adverb goes <strong>after</strong> <em>don't</em> or <em>doesn't</em>.</p>
+  <ul class="ex">
+    <li>I don't <span class="hl">usually</span> eat breakfast.</li>
+    <li>He doesn't <span class="hl">often</span> speak in class.</li>
+  </ul>
+
+  <div class="box">
+    <span class="lbl">Careful with "never"</span>
+    <em>Never</em> is already negative, so we do <strong>not</strong> use it with <em>don't</em>.
+    <div class="pair" style="margin-top:8px;">
+      <div class="no"><span class="tag">Not correct</span>I don't never eat meat.</div>
+      <div class="yes"><span class="tag">Correct</span>I never eat meat.</div>
+    </div>
+  </div>
+
+  <h3>Questions</h3>
+  <p>The adverb goes <strong>after the subject</strong>. In questions we often use <em>ever</em> instead of <em>always</em>.</p>
+  <ul class="ex">
+    <li>Do you <span class="hl">usually</span> walk to work?</li>
+    <li>Does she <span class="hl">often</span> visit her family?</li>
+    <li>Do you <span class="hl">ever</span> cook Afghan food? &mdash; <span class="note">(ever = at any time)</span></li>
+  </ul>
+
+  <h3>Asking how often</h3>
+  <p>To ask about frequency directly, we use <strong>How often&hellip;?</strong></p>
+  <ul class="ex">
+    <li><span class="hl-c">How often</span> do you go to the market? &mdash; <em>Twice a week.</em></li>
+    <li><span class="hl-c">How often</span> does he call you? &mdash; <em>Every day.</em></li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">5</span>Adverbs that can move</h2>
+  <p>Some adverbs can also go at the <strong>beginning</strong> or the <strong>end</strong> of a sentence. This does not change the meaning much, but it can add a little emphasis.<sup class="ref">[2]</sup></p>
+
+  <table>
+    <thead><tr><th style="width:38%">These can move</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="lab">sometimes, usually, often, occasionally, frequently</td>
+        <td><em>Sometimes</em> I walk to work.<br>I walk to work <em>sometimes</em>.<br><em>Usually</em> we have class on Friday.</td>
+      </tr>
+      <tr>
+        <td class="lab">always, never, rarely, seldom, hardly ever</td>
+        <td>These normally stay <strong>in the middle</strong>.<br>Say: <em>I never eat meat.</em> &nbsp;Not: <em>I eat meat never.</em></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="num">6</span>Frequency expressions</h2>
+  <p>These are phrases, not single adverbs. They go at the <strong>beginning</strong> or, more usually, the <strong>end</strong> of the sentence &mdash; never in the middle.</p>
+
+  <table>
+    <thead><tr><th style="width:36%">Expression</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td class="lab">every day / every week</td><td>I study English <em>every day</em>.</td></tr>
+      <tr><td class="lab">once a week</td><td>We have class <em>once a week</em>.</td></tr>
+      <tr><td class="lab">twice a month</td><td>She visits her sister <em>twice a month</em>.</td></tr>
+      <tr><td class="lab">three times a year</td><td>They travel <em>three times a year</em>.</td></tr>
+      <tr><td class="lab">on Fridays / on weekends</td><td><em>On Fridays</em> I cook for my family.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pair">
+    <div class="no"><span class="tag">Not correct</span>I <em>twice a week</em> go to the market.</div>
+    <div class="yes"><span class="tag">Correct</span>I go to the market <em>twice a week</em>.</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">7</span>Common mistakes</h2>
+  <table>
+    <thead><tr><th style="width:44%">Not correct</th><th>Correct</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--clay);">She drinks always tea.</td><td style="color:var(--green);">She <strong>always drinks</strong> tea.</td></tr>
+      <tr><td style="color:var(--clay);">He always is late.</td><td style="color:var(--green);">He <strong>is always</strong> late.</td></tr>
+      <tr><td style="color:var(--clay);">I don't never go out.</td><td style="color:var(--green);">I <strong>never</strong> go out.</td></tr>
+      <tr><td style="color:var(--clay);">I go never to the market.</td><td style="color:var(--green);">I <strong>never go</strong> to the market.</td></tr>
+      <tr><td style="color:var(--clay);">She usually don't work late.</td><td style="color:var(--green);">She <strong>doesn't usually</strong> work late.</td></tr>
+      <tr><td style="color:var(--clay);">I every day study English.</td><td style="color:var(--green);">I study English <strong>every day</strong>.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="num">8</span>Quick summary</h2>
+  <table>
+    <thead><tr><th style="width:38%">Situation</th><th>Where the adverb goes</th></tr></thead>
+    <tbody>
+      <tr><td class="lab">Main verb</td><td><strong>Before</strong> the verb &mdash; <em>She always drinks tea.</em></td></tr>
+      <tr><td class="lab">The verb <em>be</em></td><td><strong>After</strong> the verb &mdash; <em>She is always tired.</em></td></tr>
+      <tr><td class="lab">Helping verb</td><td><strong>After</strong> the first helping verb &mdash; <em>I have never been there.</em></td></tr>
+      <tr><td class="lab">Negative</td><td>After <em>don't / doesn't</em> &mdash; <em>I don't usually eat out.</em></td></tr>
+      <tr><td class="lab">Question</td><td>After the subject &mdash; <em>Do you usually walk?</em></td></tr>
+      <tr><td class="lab">Expressions</td><td>Beginning or end &mdash; <em>I go there twice a week.</em></td></tr>
+    </tbody>
+  </table>
+
+  <div class="box green">
+    <span class="lbl">Remember</span>
+    Most adverbs of frequency go <strong>before the main verb</strong> &mdash; but <strong>after</strong> the verb <em>be</em>. If you remember only one thing today, remember that.
+  </div>
+</section>
+
+<div class="sources">
+  <h2>Sources</h2>
+  <p class="intro">This handout follows the rules given by these trusted grammar references:</p>
+  <ol class="srclist">
+    <li>British Council LearnEnglish Teens &mdash; &ldquo;Adverbs of frequency.&rdquo;
+      <a href="https://learnenglishteens.britishcouncil.org/grammar/a1-a2-grammar/adverbs-frequency">https://learnenglishteens.britishcouncil.org/grammar/a1-a2-grammar/adverbs-frequency</a></li>
+    <li>Cambridge Dictionary &mdash; &ldquo;Adverbs of frequency,&rdquo; English Grammar Today.
+      <a href="https://dictionary.cambridge.org/grammar/british-grammar/adverbs-of-frequency">https://dictionary.cambridge.org/grammar/british-grammar/adverbs-of-frequency</a></li>
+    <li>British Council LearnEnglish &mdash; &ldquo;Adverbials of frequency&rdquo; (position with <em>be</em> and helping verbs).
+      <a href="https://learnenglish.britishcouncil.org/grammar/english-grammar-reference/adverbials-time">https://learnenglish.britishcouncil.org/grammar/english-grammar-reference/adverbials-time</a></li>
+  </ol>
+</div>
+
+<p class="closing">&ldquo;Little by little, a little becomes a lot.&rdquo;</p>
+
+</div>
+</body>
+</html>
