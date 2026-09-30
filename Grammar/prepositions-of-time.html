@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prepositions of Time: at, on, in — Grammar Handout</title>
+<style>
+  :root{
+    --teal:#0d6e6e; --teal-deep:#094f4f; --gold:#d8a24a; --clay:#c46a4a;
+    --paper:#faf7f2; --ink:#1f2a2e; --muted:#5f6b6b; --line:#e6ded2;
+    --green:#2c6e49; --purple:#6d4c7d; --card:#ffffff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:var(--paper); color:var(--ink);
+    line-height:1.6; padding:0 18px 60px;
+  }
+  .sheet{max-width:820px; margin:0 auto;}
+
+  header{padding:36px 0 18px; border-bottom:3px solid var(--gold); margin-bottom:26px;}
+  .program{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.72rem; font-weight:bold;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--clay); margin-bottom:10px;
+  }
+  h1{font-size:2.1rem; font-weight:normal; color:var(--teal-deep); line-height:1.15;}
+  .sub{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem; color:var(--muted); font-style:italic; margin-top:8px;}
+
+  section{margin-bottom:30px;}
+  h2{
+    font-size:1.32rem; font-weight:normal; color:var(--teal-deep);
+    margin-bottom:12px; padding-bottom:6px; border-bottom:1px solid var(--line);
+  }
+  h2 .num{color:var(--clay); font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem; font-weight:bold; margin-right:8px;}
+  h3{font-size:1.06rem; font-weight:normal; color:var(--clay); margin:20px 0 8px;}
+  p{margin-bottom:12px;}
+
+  ul.ex{list-style:none; margin:10px 0 14px;}
+  ul.ex li{padding:6px 0 6px 20px; position:relative; line-height:1.55;}
+  ul.ex li::before{
+    content:""; position:absolute; left:2px; top:15px;
+    width:7px; height:7px; border-radius:50%; background:var(--gold);
+  }
+  .hl{font-weight:bold; color:var(--teal);}
+  .hl-b{font-weight:bold; color:var(--clay);}
+  .hl-c{font-weight:bold; color:var(--purple);}
+  .note{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.86rem; color:var(--muted); font-style:italic;}
+
+  table{width:100%; border-collapse:collapse; margin:12px 0 16px; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.94rem;}
+  th{background:var(--teal); color:#fff; text-align:left; font-weight:bold; padding:9px 12px; border:1px solid var(--teal);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tbody tr:nth-child(odd) td{background:#f6f1e9;}
+  tbody tr:nth-child(even) td{background:#fff;}
+  td.lab{font-weight:bold; color:var(--teal-deep); white-space:nowrap;}
+
+  /* three-column overview */
+  .three{display:flex; gap:14px; margin:16px 0 20px; flex-wrap:wrap;}
+  .col{flex:1; min-width:210px; border:1px solid var(--line); border-radius:9px; overflow:hidden; background:#fff;}
+  .col .cap{padding:12px 14px; color:#fff; font-family:"Trebuchet MS",Arial,sans-serif;}
+  .col .cap .big{font-size:1.5rem; font-weight:bold; display:block; line-height:1.1;}
+  .col .cap .small{font-size:.8rem; opacity:.92;}
+  .col ul{list-style:none; padding:12px 14px; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem;}
+  .col ul li{padding:4px 0;}
+
+  .box{
+    background:#f6f1e9; border-left:4px solid var(--clay);
+    padding:14px 18px; margin:16px 0; border-radius:0 8px 8px 0;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.93rem; line-height:1.65;
+  }
+  .box.teal{border-left-color:var(--teal); background:#eef4f2;}
+  .box.green{border-left-color:var(--green); background:#eef4ef;}
+  .box.purple{border-left-color:var(--purple); background:#f2edf4;}
+  .box .lbl{font-weight:bold; color:var(--clay); display:block; margin-bottom:5px; letter-spacing:.03em;}
+  .box.teal .lbl{color:var(--teal);}
+  .box.green .lbl{color:var(--green);}
+  .box.purple .lbl{color:var(--purple);}
+
+  .pair{margin:10px 0 14px;}
+  .pair div{padding:6px 0 6px 124px; position:relative; line-height:1.55;}
+  .pair .tag{
+    position:absolute; left:0; top:8px; font-family:"Trebuchet MS",Arial,sans-serif;
+    font-size:.7rem; font-weight:bold; letter-spacing:.08em; text-transform:uppercase;
+    padding:2px 8px; border-radius:3px;
+  }
+  .pair .no .tag{background:#f6e2db; color:var(--clay);}
+  .pair .yes .tag{background:#e2efe7; color:var(--green);}
+  .pair .no{color:var(--muted);}
+
+  .sources{margin-top:36px; padding-top:16px; border-top:2px solid var(--gold);}
+  .sources h2{border-bottom:none; margin-bottom:6px;}
+  .sources p.intro{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.86rem; color:var(--muted); font-style:italic; margin-bottom:12px;}
+  ol.srclist{list-style:none; counter-reset:s; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.82rem; line-height:1.6;}
+  ol.srclist li{counter-increment:s; padding:5px 0 5px 34px; position:relative;}
+  ol.srclist li::before{content:"[" counter(s) "]"; position:absolute; left:0; top:5px; font-weight:bold; color:var(--teal);}
+  ol.srclist a{color:#1155cc; word-break:break-all;}
+  sup.ref{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.68rem; font-weight:bold; color:var(--teal); vertical-align:super;}
+  .closing{margin-top:30px; text-align:center; font-style:italic; color:var(--gold); font-size:1.02rem;}
+
+  @media print{
+    body{background:#fff; padding:0; font-size:11pt;}
+    .sheet{max-width:100%;}
+    section, table, .box, .three{page-break-inside:avoid;}
+    ol.srclist a{color:#000; text-decoration:none;}
+  }
+  @media(max-width:560px){
+    h1{font-size:1.6rem;}
+    .pair div{padding-left:0; padding-top:24px;}
+    .pair .tag{top:0;}
+    table{font-size:.86rem;}
+    th,td{padding:7px 9px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header>
+  <div class="program">Free English Program &middot; Grammar Handout</div>
+  <h1>Prepositions of Time: at, on, in</h1>
+  <div class="sub">Week 3 &mdash; Daily Life &amp; Time &nbsp;&middot;&nbsp; Saying when something happens &nbsp;&middot;&nbsp; American English</div>
+</header>
+
+<section>
+  <h2><span class="num">1</span>The main idea</h2>
+  <p>We use <strong>at</strong>, <strong>on</strong> and <strong>in</strong> to say <strong>when</strong> something happens. There is a simple way to remember which one to choose: think about how <em>long</em> the time is.<sup class="ref">[1]</sup></p>
+
+  <div class="three">
+    <div class="col">
+      <div class="cap" style="background:#0d6e6e;">
+        <span class="big">at</span>
+        <span class="small">a point in time &mdash; the shortest</span>
+      </div>
+      <ul>
+        <li>at 7 o'clock</li>
+        <li>at noon</li>
+        <li>at midnight</li>
+        <li>at night</li>
+        <li>at lunchtime</li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="cap" style="background:#c46a4a;">
+        <span class="big">on</span>
+        <span class="small">days and dates</span>
+      </div>
+      <ul>
+        <li>on Monday</li>
+        <li>on Fridays</li>
+        <li>on May 5th</li>
+        <li>on my birthday</li>
+        <li>on the weekend</li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="cap" style="background:#6d4c7d;">
+        <span class="big">in</span>
+        <span class="small">longer periods &mdash; the longest</span>
+      </div>
+      <ul>
+        <li>in the morning</li>
+        <li>in May</li>
+        <li>in the summer</li>
+        <li>in 2026</li>
+        <li>in two weeks</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box teal">
+    <span class="lbl">One easy way to remember</span>
+    The time gets <strong>longer</strong> as you move along: <strong>at</strong> a moment &rarr; <strong>on</strong> a day &rarr; <strong>in</strong> a month, a season or a year.
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">2</span>AT &mdash; a point in time</h2>
+  <p>Use <strong>at</strong> for clock times and for short, exact moments.<sup class="ref">[1]</sup></p>
+
+  <table>
+    <thead><tr><th style="width:34%">Use it for</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr><td class="lab">Clock times</td><td>The class starts <em>at four o'clock</em>. &nbsp;I wake up <em>at 6:30</em>.</td></tr>
+      <tr><td class="lab">noon and midnight</td><td>We have lunch <em>at noon</em>. &nbsp;The store closes <em>at midnight</em>.</td></tr>
+      <tr><td class="lab">night</td><td>I read <em>at night</em>.</td></tr>
+      <tr><td class="lab">Mealtimes</td><td>We talk <em>at breakfast</em>. &nbsp;She calls me <em>at lunchtime</em>.</td></tr>
+      <tr><td class="lab">Short expressions</td><td><em>at the moment</em>, <em>at the same time</em>, <em>at that time</em></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="num">3</span>ON &mdash; days and dates</h2>
+  <p>Use <strong>on</strong> for one particular day, for days that repeat, and for dates.<sup class="ref">[1]</sup></p>
+
+  <table>
+    <thead><tr><th style="width:34%">Use it for</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr><td class="lab">Days of the week</td><td>I have class <em>on Monday</em>.</td></tr>
+      <tr><td class="lab">Repeated days</td><td>She works <em>on Fridays</em>. &nbsp;<span class="note">(= every Friday)</span></td></tr>
+      <tr><td class="lab">Dates</td><td>My birthday is <em>on May 5th</em>. &nbsp;We met <em>on July 12, 2024</em>.</td></tr>
+      <tr><td class="lab">Special days</td><td><em>on my birthday</em>, <em>on New Year's Day</em>, <em>on our anniversary</em></td></tr>
+      <tr><td class="lab">The weekend</td><td>I rest <em>on the weekend</em>. &nbsp;<span class="note">(American English)</span></td></tr>
+      <tr><td class="lab">A day + part of the day</td><td>I'll call you <em>on Monday morning</em>.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box">
+    <span class="lbl">Important &mdash; day plus part of the day</span>
+    We normally say <em>in the morning</em>. But when we name the <strong>day</strong> as well, we use <strong>on</strong>:
+    <div class="pair" style="margin-top:8px;">
+      <div class="yes"><span class="tag">Correct</span>I study <em>in the morning</em>.</div>
+      <div class="yes"><span class="tag">Correct</span>I study <em>on Saturday morning</em>.</div>
+      <div class="no"><span class="tag">Not correct</span>I study in Saturday morning.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">4</span>IN &mdash; longer periods</h2>
+  <p>Use <strong>in</strong> for parts of the day, months, seasons, years and other long periods.<sup class="ref">[1]</sup></p>
+
+  <table>
+    <thead><tr><th style="width:34%">Use it for</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr><td class="lab">Parts of the day</td><td><em>in the morning</em>, <em>in the afternoon</em>, <em>in the evening</em></td></tr>
+      <tr><td class="lab">Months</td><td>My sister was born <em>in May</em>.</td></tr>
+      <tr><td class="lab">Seasons</td><td>It's very hot <em>in the summer</em>.</td></tr>
+      <tr><td class="lab">Years and decades</td><td>We moved here <em>in 2024</em>. &nbsp;<em>in the 1990s</em></td></tr>
+      <tr><td class="lab">Future periods</td><td>I'll see you <em>in two weeks</em>. &nbsp;<span class="note">(= after two weeks)</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="num">5</span>The three traps</h2>
+
+  <div class="box">
+    <span class="lbl">Trap 1 &mdash; at night</span>
+    We say <em>in the morning</em>, <em>in the afternoon</em> and <em>in the evening</em> &mdash; but <strong>at night</strong>. This does not follow the pattern, so it is worth learning as a fixed phrase.
+    <div class="pair" style="margin-top:8px;">
+      <div class="no"><span class="tag">Not correct</span>I read in the night.</div>
+      <div class="yes"><span class="tag">Correct</span>I read <em>at night</em>.</div>
+    </div>
+  </div>
+
+  <div class="box">
+    <span class="lbl">Trap 2 &mdash; the day wins</span>
+    When a day and a part of the day come together, <strong>on</strong> wins.
+    <div class="pair" style="margin-top:8px;">
+      <div class="no"><span class="tag">Not correct</span>We have class in Friday evening.</div>
+      <div class="yes"><span class="tag">Correct</span>We have class <em>on Friday evening</em>.</div>
+    </div>
+  </div>
+
+  <div class="box purple">
+    <span class="lbl">Trap 3 &mdash; the weekend</span>
+    In <strong>American English</strong> we say <em>on the weekend</em>.<br>
+    In <strong>British English</strong> you will hear <em>at the weekend</em>. Both are correct in their own variety &mdash; choose one and be consistent.<sup class="ref">[2]</sup>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">6</span>When you need no preposition at all</h2>
+  <p>Some time words never take <em>at</em>, <em>on</em> or <em>in</em>. This is a very common mistake, so look at this list carefully.<sup class="ref">[3]</sup></p>
+
+  <table>
+    <thead><tr><th style="width:44%">These take no preposition</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td class="lab">every day, every week, every year</td><td>I study English <em>every day</em>.</td></tr>
+      <tr><td class="lab">today, tomorrow, yesterday</td><td>I'll call you <em>tomorrow</em>.</td></tr>
+      <tr><td class="lab">this / last / next + time word</td><td>We met <em>last week</em>. &nbsp;She starts <em>next month</em>.</td></tr>
+      <tr><td class="lab">all day, all morning, all week</td><td>It rained <em>all day</em>.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pair">
+    <div class="no"><span class="tag">Not correct</span>I study English <em>in every day</em>.</div>
+    <div class="yes"><span class="tag">Correct</span>I study English <em>every day</em>.</div>
+    <div class="no"><span class="tag">Not correct</span>I will see you <em>on next week</em>.</div>
+    <div class="yes"><span class="tag">Correct</span>I will see you <em>next week</em>.</div>
+  </div>
+
+  <div class="box green">
+    <span class="lbl">Good to know</span>
+    In everyday American speech, people often leave out <em>on</em> before a day: <em>&ldquo;I'll see you Monday.&rdquo;</em> This is normal in conversation. Keep <em>on</em> when you write.
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">7</span>Common mistakes</h2>
+  <table>
+    <thead><tr><th style="width:44%">Not correct</th><th>Correct</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--clay);">I wake up in 6 o'clock.</td><td style="color:var(--green);">I wake up <strong>at</strong> 6 o'clock.</td></tr>
+      <tr><td style="color:var(--clay);">I study in the night.</td><td style="color:var(--green);">I study <strong>at</strong> night.</td></tr>
+      <tr><td style="color:var(--clay);">My birthday is in May 5th.</td><td style="color:var(--green);">My birthday is <strong>on</strong> May 5th.</td></tr>
+      <tr><td style="color:var(--clay);">We have class at Monday.</td><td style="color:var(--green);">We have class <strong>on</strong> Monday.</td></tr>
+      <tr><td style="color:var(--clay);">She was born on 1998.</td><td style="color:var(--green);">She was born <strong>in</strong> 1998.</td></tr>
+      <tr><td style="color:var(--clay);">I rest in the weekend.</td><td style="color:var(--green);">I rest <strong>on</strong> the weekend.</td></tr>
+      <tr><td style="color:var(--clay);">I go there in every day.</td><td style="color:var(--green);">I go there <strong>every day</strong>.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="num">8</span>Quick summary</h2>
+  <table>
+    <thead><tr><th style="width:18%">Word</th><th style="width:34%">Use it for</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr><td class="lab" style="color:#0d6e6e; font-size:1.1rem;">at</td><td>clock times, noon, midnight, night, mealtimes</td><td>at 8 o'clock &middot; at noon &middot; at night</td></tr>
+      <tr><td class="lab" style="color:#c46a4a; font-size:1.1rem;">on</td><td>days, repeated days, dates, special days, the weekend</td><td>on Tuesday &middot; on May 5th &middot; on the weekend</td></tr>
+      <tr><td class="lab" style="color:#6d4c7d; font-size:1.1rem;">in</td><td>parts of the day, months, seasons, years</td><td>in the morning &middot; in July &middot; in 2026</td></tr>
+      <tr><td class="lab" style="color:#2c6e49; font-size:1.05rem;">nothing</td><td>every, this, last, next, today, tomorrow, all</td><td>every day &middot; next week &middot; tomorrow</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box green">
+    <span class="lbl">Remember</span>
+    <strong>at</strong> a moment &rarr; <strong>on</strong> a day &rarr; <strong>in</strong> a longer period. And the one that breaks the pattern: <strong>at night</strong>.
+  </div>
+</section>
+
+<div class="sources">
+  <h2>Sources</h2>
+  <p class="intro">This handout follows the rules given by these trusted grammar references:</p>
+  <ol class="srclist">
+    <li>Cambridge Dictionary &mdash; &ldquo;At, on and in (time),&rdquo; English Grammar Today.
+      <a href="https://dictionary.cambridge.org/grammar/british-grammar/at-on-and-in-time">https://dictionary.cambridge.org/grammar/british-grammar/at-on-and-in-time</a></li>
+    <li>Cambridge Dictionary &mdash; &ldquo;Weekend&rdquo; (American <em>on the weekend</em> / British <em>at the weekend</em>).
+      <a href="https://dictionary.cambridge.org/grammar/british-grammar/weekend">https://dictionary.cambridge.org/grammar/british-grammar/weekend</a></li>
+    <li>British Council LearnEnglish &mdash; &ldquo;Prepositions of time.&rdquo;
+      <a href="https://learnenglish.britishcouncil.org/grammar/english-grammar-reference/prepositions-time">https://learnenglish.britishcouncil.org/grammar/english-grammar-reference/prepositions-time</a></li>
+  </ol>
+</div>
+
+<p class="closing">&ldquo;Little by little, a little becomes a lot.&rdquo;</p>
+
+</div>
+</body>
+</html>
