@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 Worksheet — Food and Shopping</title>
+<style>
+  :root{
+    --teal:#0d6e6e; --teal-deep:#094f4f; --gold:#d8a24a; --clay:#c46a4a;
+    --paper:#faf7f2; --ink:#1f2a2e; --muted:#5f6b6b; --line:#e6ded2;
+    --green:#2c6e49; --purple:#6d4c7d; --card:#ffffff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Georgia,"Times New Roman",serif; background:var(--paper); color:var(--ink);
+    line-height:1.65; padding:0 18px 70px;}
+  .sheet{max-width:840px; margin:0 auto;}
+
+  header{padding:34px 0 16px; border-bottom:3px solid var(--gold); margin-bottom:10px;}
+  .program{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.72rem; font-weight:bold;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--clay); margin-bottom:10px;}
+  h1{font-size:2.05rem; font-weight:normal; color:var(--teal-deep); line-height:1.15;}
+  .sub{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem; color:var(--muted); font-style:italic; margin-top:8px;}
+  .namebar{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; color:var(--muted);
+    padding:14px 0 22px; border-bottom:1px solid var(--line); margin-bottom:26px;}
+  .namebar input{width:220px;}
+
+  /* part header */
+  .part{display:flex; align-items:center; gap:14px; background:var(--teal); color:#fff;
+    border-radius:10px; padding:13px 20px; margin:36px 0 6px;}
+  .part .letter{font-family:Georgia,serif; font-size:1.9rem; line-height:1; opacity:.55;}
+  .part .nm{font-family:Georgia,serif; font-size:1.3rem;}
+  .part .nm small{display:block; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.8rem;
+    font-style:italic; opacity:.92; margin-top:3px;}
+  .part.b{background:var(--clay);} .part.c{background:var(--purple);}
+  .part.d{background:var(--green);} .part.e{background:var(--teal-deep);}
+
+  h3{font-size:1.06rem; font-weight:normal; color:var(--clay); margin:24px 0 4px;}
+  .instr{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; color:var(--muted);
+    font-style:italic; margin-bottom:14px;}
+  p{margin-bottom:12px;}
+
+  /* inputs that also print as blank lines */
+  input[type=text]{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:1rem; color:var(--teal-deep);
+    font-weight:bold; border:none; border-bottom:2px solid var(--teal); background:#f3efe7;
+    padding:3px 8px; border-radius:4px 4px 0 0; width:110px; text-align:center;
+  }
+  input[type=text]:focus{outline:none; background:#e9f1ef;}
+  input.wide{width:100%; text-align:left; font-weight:normal; color:var(--ink);}
+  input.mid{width:170px; text-align:left; font-weight:normal; color:var(--ink);}
+  input.tiny{width:58px;}
+
+  /* numbered question rows */
+  ol.q{list-style:none; counter-reset:q; margin:6px 0 10px;}
+  ol.q li{counter-increment:q; padding:9px 0 9px 34px; position:relative; line-height:2.1;}
+  ol.q li::before{content:counter(q) "."; position:absolute; left:2px; top:9px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-weight:bold; color:var(--teal);}
+
+  /* word bank */
+  .bank{border:2px solid var(--gold); border-radius:10px; padding:13px 18px; margin:12px 0 18px;
+    text-align:center; font-family:"Trebuchet MS",Arial,sans-serif;}
+  .bank .bl{font-size:.74rem; font-weight:bold; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--clay); margin-bottom:7px;}
+  .bank .words{font-size:1.05rem; color:var(--teal-deep); font-weight:bold; line-height:1.9;}
+
+  /* two column sort table */
+  table{width:100%; border-collapse:collapse; margin:12px 0 16px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem;}
+  th{background:var(--teal); color:#fff; text-align:left; font-weight:bold; padding:9px 12px; border:1px solid var(--teal);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:middle;}
+  tbody tr:nth-child(odd) td{background:#f6f1e9;}
+  tbody tr:nth-child(even) td{background:#fff;}
+  td.food{font-weight:bold; color:var(--teal-deep);}
+
+  /* dialogue */
+  .dialogue{background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px 22px; margin:12px 0 16px;}
+  .dialogue .ln{display:flex; gap:12px; padding:7px 0; line-height:2.1; align-items:baseline; flex-wrap:wrap;}
+  .dialogue .who{font-family:"Trebuchet MS",Arial,sans-serif; font-weight:bold; min-width:110px; flex-shrink:0;}
+  .dialogue .who.a{color:var(--teal);} .dialogue .who.b{color:var(--clay);}
+
+  /* writing lines */
+  .lines div{border-bottom:1px solid #d9cfc0; height:34px; margin-bottom:6px;}
+
+  /* role cards */
+  .cards{display:flex; gap:16px; margin:14px 0 18px; flex-wrap:wrap;}
+  .rcard{flex:1; min-width:260px; background:#fff; border:2px solid var(--line); border-radius:12px; padding:18px 20px;}
+  .rcard.a{border-color:var(--teal);} .rcard.b{border-color:var(--clay);}
+  .rcard .rh{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.76rem; font-weight:bold;
+    letter-spacing:.12em; text-transform:uppercase; margin-bottom:4px;}
+  .rcard.a .rh{color:var(--teal);} .rcard.b .rh{color:var(--clay);}
+  .rcard h4{font-family:Georgia,serif; font-size:1.2rem; font-weight:normal; color:var(--teal-deep); margin-bottom:10px;}
+  .rcard ul{list-style:none; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.93rem;}
+  .rcard ul li{padding:4px 0 4px 18px; position:relative; line-height:1.55;}
+  .rcard ul li::before{content:""; position:absolute; left:2px; top:13px; width:6px; height:6px;
+    border-radius:50%; background:var(--gold);}
+  .starters{margin-top:12px; background:#f6f1e9; border-radius:8px; padding:11px 14px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.88rem; line-height:1.8;}
+  .starters b{color:var(--clay); display:block; margin-bottom:4px; font-size:.74rem;
+    letter-spacing:.1em; text-transform:uppercase;}
+
+  .box{background:#f6f1e9; border-left:4px solid var(--clay); padding:13px 18px; margin:14px 0;
+    border-radius:0 8px 8px 0; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; line-height:1.65;}
+  .box.teal{border-left-color:var(--teal); background:#eef4f2;}
+  .box.purple{border-left-color:var(--purple); background:#f2edf4;}
+  .box .lbl{font-weight:bold; color:var(--clay); display:block; margin-bottom:4px; letter-spacing:.03em;}
+  .box.teal .lbl{color:var(--teal);} .box.purple .lbl{color:var(--purple);}
+
+  .closing{margin-top:34px; text-align:center; font-style:italic; color:var(--gold); font-size:1.02rem;}
+
+  /* ---------- print / save toolbar ---------- */
+  .toolbar{
+    position:sticky; top:0; z-index:30; background:var(--paper);
+    border-bottom:1px solid var(--line); padding:12px 0 11px;
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+  }
+  .toolbar button{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; font-weight:bold;
+    padding:11px 20px; border-radius:10px; border:none; cursor:pointer;
+    min-height:44px; transition:transform .1s;
+  }
+  .toolbar button:active{transform:scale(.97);}
+  .tb-print{background:var(--teal); color:#fff; box-shadow:0 3px 0 #073c3c;}
+  .tb-save{background:var(--gold); color:#3a2a10; box-shadow:0 3px 0 #a9791f;}
+  .tb-clear{background:transparent; color:var(--muted); border:2px solid var(--line)!important;}
+  .savenote{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.85rem; color:var(--green);
+    margin-left:4px; min-height:1.2em; flex:1; min-width:170px;
+  }
+
+  @media print{
+    body{background:#fff; padding:0; font-size:11pt;}
+    input[type=text]{background:transparent; border-bottom:1px solid #555; color:#000;}
+    .part, table, .dialogue, .rcard, .box, .bank{page-break-inside:avoid;}
+    .toolbar{display:none!important;}
+  }
+  @media(max-width:560px){
+    h1{font-size:1.6rem;}
+    .part{flex-direction:row;}
+    .dialogue .who{min-width:0;}
+    input[type=text]{width:88px;}
+    table{font-size:.88rem;} th,td{padding:7px 9px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header>
+  <div class="program">Free English Program &middot; Student Worksheet</div>
+  <h1>Week 4 &mdash; Food and Shopping</h1>
+  <div class="sub">Countable and uncountable &nbsp;&middot;&nbsp; some / any &nbsp;&middot;&nbsp; much / many &nbsp;&middot;&nbsp; How much / How many</div>
+</header>
+
+<div class="toolbar">
+  <button type="button" class="tb-print" id="printBtn">Print or save as PDF</button>
+  <button type="button" class="tb-save" id="saveBtn">Save my answers</button>
+  <button type="button" class="tb-clear" id="clearBtn">Clear</button>
+  <span class="savenote" id="saveStatus"></span>
+</div>
+
+<div class="namebar">
+  Name: <input type="text" class="mid" aria-label="Your name">
+  &nbsp;&nbsp;&nbsp; Date: <input type="text" class="mid" aria-label="Date">
+</div>
+
+<div class="box teal">
+  <span class="lbl">Before you start</span>
+  You can type your answers on this page, or print it and write by hand, or copy the answers into your notebook.
+  Do Parts A and B in class with your teacher. Part C is for writing on your own. Parts D and E are for speaking together.
+  <br><br>
+  <strong>Keep your work:</strong> your answers are saved on your own phone or computer as you type, so you can close
+  this page and come back later. Tap <strong>Print or save as PDF</strong> to keep a copy or to send it to your teacher.
+</div>
+
+<!-- ================= PART A ================= -->
+<div class="part"><span class="letter">A</span><span class="nm">Controlled practice<small>Work on your own, then check with the class</small></span></div>
+
+<h3>A1 &middot; Can you count it?</h3>
+<p class="instr">Write <strong>C</strong> if we can count it, or <strong>U</strong> if we cannot count it.</p>
+<table>
+  <thead><tr><th style="width:30%">Word</th><th style="width:20%">C or U</th><th style="width:30%">Word</th><th style="width:20%">C or U</th></tr></thead>
+  <tbody>
+    <tr><td class="food">1. apple</td><td><input type="text" class="tiny" aria-label="1"></td><td class="food">7. banana</td><td><input type="text" class="tiny" aria-label="7"></td></tr>
+    <tr><td class="food">2. rice</td><td><input type="text" class="tiny" aria-label="2"></td><td class="food">8. cheese</td><td><input type="text" class="tiny" aria-label="8"></td></tr>
+    <tr><td class="food">3. tomato</td><td><input type="text" class="tiny" aria-label="3"></td><td class="food">9. onion</td><td><input type="text" class="tiny" aria-label="9"></td></tr>
+    <tr><td class="food">4. water</td><td><input type="text" class="tiny" aria-label="4"></td><td class="food">10. sugar</td><td><input type="text" class="tiny" aria-label="10"></td></tr>
+    <tr><td class="food">5. egg</td><td><input type="text" class="tiny" aria-label="5"></td><td class="food">11. potato</td><td><input type="text" class="tiny" aria-label="11"></td></tr>
+    <tr><td class="food">6. bread</td><td><input type="text" class="tiny" aria-label="6"></td><td class="food">12. oil</td><td><input type="text" class="tiny" aria-label="12"></td></tr>
+  </tbody>
+</table>
+
+<h3>A2 &middot; some or any?</h3>
+<p class="instr">Write <strong>some</strong> or <strong>any</strong> in each gap.</p>
+<ol class="q">
+  <li>I need <input type="text" aria-label="A2 1"> milk for the tea.</li>
+  <li>We don't have <input type="text" aria-label="A2 2"> eggs.</li>
+  <li>Would you like <input type="text" aria-label="A2 3"> bread?</li>
+  <li>Is there <input type="text" aria-label="A2 4"> sugar in the kitchen?</li>
+  <li>She bought <input type="text" aria-label="A2 5"> apples at the market.</li>
+  <li>There aren't <input type="text" aria-label="A2 6"> tomatoes in the fridge.</li>
+  <li>Can I have <input type="text" aria-label="A2 7"> water, please?</li>
+  <li>Do you have <input type="text" aria-label="A2 8"> rice?</li>
+</ol>
+
+<h3>A3 &middot; much or many?</h3>
+<p class="instr">Write <strong>much</strong> or <strong>many</strong> in each gap.</p>
+<ol class="q">
+  <li>How <input type="text" aria-label="A3 1"> eggs do we need?</li>
+  <li>How <input type="text" aria-label="A3 2"> rice is in the bag?</li>
+  <li>There isn't <input type="text" aria-label="A3 3"> milk left.</li>
+  <li>I don't eat <input type="text" aria-label="A3 4"> sweets.</li>
+  <li>How <input type="text" aria-label="A3 5"> does this cost?</li>
+  <li>We don't have <input type="text" aria-label="A3 6"> potatoes.</li>
+</ol>
+
+<h3>A4 &middot; How much or How many?</h3>
+<p class="instr">Write <strong>How much</strong> or <strong>How many</strong> at the start of each question.</p>
+<ol class="q">
+  <li><input type="text" class="mid" aria-label="A4 1"> sugar do you take in your tea?</li>
+  <li><input type="text" class="mid" aria-label="A4 2"> bananas did you buy?</li>
+  <li><input type="text" class="mid" aria-label="A4 3"> is a kilo of rice?</li>
+  <li><input type="text" class="mid" aria-label="A4 4"> people are coming for dinner?</li>
+</ol>
+
+<!-- ================= PART B ================= -->
+<div class="part b"><span class="letter">B</span><span class="nm">Semi-controlled practice<small>Work with a partner and say your answers out loud</small></span></div>
+
+<h3>B1 &middot; How do we count it?</h3>
+<p class="instr">Choose a word from the box for each phrase. Use each word once.</p>
+<div class="bank">
+  <div class="bl">Word box</div>
+  <div class="words">water &nbsp;&middot;&nbsp; rice &nbsp;&middot;&nbsp; bread &nbsp;&middot;&nbsp; tea &nbsp;&middot;&nbsp; biscuits &nbsp;&middot;&nbsp; flour</div>
+</div>
+<ol class="q">
+  <li>a bottle of <input type="text" aria-label="B1 1"></li>
+  <li>a kilo of <input type="text" aria-label="B1 2"></li>
+  <li>a loaf of <input type="text" aria-label="B1 3"></li>
+  <li>a cup of <input type="text" aria-label="B1 4"></li>
+  <li>a packet of <input type="text" aria-label="B1 5"></li>
+  <li>a bag of <input type="text" aria-label="B1 6"></li>
+</ol>
+
+<h3>B2 &middot; At the market</h3>
+<p class="instr">Complete the conversation with <strong>some</strong>, <strong>any</strong>, <strong>much</strong>, <strong>How much</strong> or <strong>How many</strong>. Then read it with your partner.</p>
+<div class="dialogue">
+  <div class="ln"><span class="who b">Shopkeeper:</span><span>Good morning. Can I help you?</span></div>
+  <div class="ln"><span class="who a">Customer:</span><span>Yes, please. I need <input type="text" aria-label="B2 1"> rice.</span></div>
+  <div class="ln"><span class="who b">Shopkeeper:</span><span>How <input type="text" aria-label="B2 2"> do you need?</span></div>
+  <div class="ln"><span class="who a">Customer:</span><span>Two kilos, please. And do you have <input type="text" aria-label="B2 3"> tomatoes?</span></div>
+  <div class="ln"><span class="who b">Shopkeeper:</span><span>Yes, we have <input type="text" aria-label="B2 4"> very nice ones today.</span></div>
+  <div class="ln"><span class="who a">Customer:</span><span><input type="text" class="mid" aria-label="B2 5"> should I take for four people?</span></div>
+  <div class="ln"><span class="who b">Shopkeeper:</span><span>About six.</span></div>
+  <div class="ln"><span class="who a">Customer:</span><span>Thank you. <input type="text" class="mid" aria-label="B2 6"> is that altogether?</span></div>
+  <div class="ln"><span class="who b">Shopkeeper:</span><span>That's two hundred and fifty.</span></div>
+</div>
+
+<h3>B3 &middot; Write the question</h3>
+<p class="instr">Read the answer. Write a question with <strong>How much</strong> or <strong>How many</strong>.</p>
+<ol class="q">
+  <li><input type="text" class="wide" aria-label="B3 1"><br><span style="font-family:'Trebuchet MS',Arial,sans-serif; font-size:.9rem; color:var(--muted);">&mdash; I need two kilos of rice.</span></li>
+  <li><input type="text" class="wide" aria-label="B3 2"><br><span style="font-family:'Trebuchet MS',Arial,sans-serif; font-size:.9rem; color:var(--muted);">&mdash; We need six eggs.</span></li>
+  <li><input type="text" class="wide" aria-label="B3 3"><br><span style="font-family:'Trebuchet MS',Arial,sans-serif; font-size:.9rem; color:var(--muted);">&mdash; It's fifty afghanis.</span></li>
+  <li><input type="text" class="wide" aria-label="B3 4"><br><span style="font-family:'Trebuchet MS',Arial,sans-serif; font-size:.9rem; color:var(--muted);">&mdash; There are four people.</span></li>
+</ol>
+
+<!-- ================= PART C ================= -->
+<div class="part c"><span class="letter">C</span><span class="nm">Writing on your own<small>Do this at home and bring it to the next class</small></span></div>
+
+<h3>C1 &middot; What is in your kitchen?</h3>
+<p class="instr">Write five sentences about the food in your kitchen right now. Use <strong>some</strong>, <strong>any</strong>, <strong>much</strong>, <strong>many</strong> and <strong>a lot of</strong> &mdash; one in each sentence.</p>
+<div class="box">
+  <span class="lbl">For example</span>
+  We have a lot of rice. &nbsp;&middot;&nbsp; There isn't much sugar. &nbsp;&middot;&nbsp; We haven't got any eggs.
+</div>
+<div class="lines"><div></div><div></div><div></div><div></div><div></div></div>
+
+<h3>C2 &middot; A meal you love</h3>
+<p class="instr">Think of a meal you love. Write a shopping list for it, then write three sentences saying why you chose it and who you would cook it for.</p>
+<div class="lines"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<div class="box purple">
+  <span class="lbl">Challenge &mdash; if you want to go further</span>
+  Use <strong>a few</strong> with things you can count, and <strong>a little</strong> with things you cannot:
+  &ldquo;a few onions&rdquo;, &ldquo;a little salt&rdquo;.
+</div>
+
+<!-- ================= PART D ================= -->
+<div class="part d"><span class="letter">D</span><span class="nm">Pair and group work<small>Speaking together in class</small></span></div>
+
+<h3>D1 &middot; Role-play: at the market</h3>
+<p class="instr">Work in pairs. One of you is the customer, the other is the shopkeeper. Do not look at your partner's card. Then swap roles and do it again.</p>
+
+<div class="cards">
+  <div class="rcard a">
+    <div class="rh">Student A</div>
+    <h4>You are the customer</h4>
+    <ul>
+      <li>You are cooking dinner for six people tonight.</li>
+      <li>You need: rice, tomatoes, onions, oil and bread.</li>
+      <li>Ask how much everything costs before you agree.</li>
+      <li>You do not have much money, so ask the price of each thing.</li>
+    </ul>
+    <div class="starters">
+      <b>You can say</b>
+      Do you have any&hellip;? &nbsp;&middot;&nbsp; I need some&hellip;<br>
+      How much is&hellip;? &nbsp;&middot;&nbsp; How many should I take?<br>
+      That's too expensive. &nbsp;&middot;&nbsp; I'll take two kilos, please.
+    </div>
+  </div>
+
+  <div class="rcard b">
+    <div class="rh">Student B</div>
+    <h4>You are the shopkeeper</h4>
+    <ul>
+      <li>You have a small shop in the market.</li>
+      <li>You have a lot of rice, onions and bread today.</li>
+      <li>You have only a few tomatoes left, and no oil at all.</li>
+      <li>Offer the customer something else instead of the oil.</li>
+    </ul>
+    <div class="starters">
+      <b>You can say</b>
+      Can I help you? &nbsp;&middot;&nbsp; How much would you like?<br>
+      I'm sorry, we haven't got any&hellip;<br>
+      Would you like some&hellip; instead? &nbsp;&middot;&nbsp; That's&hellip; altogether.
+    </div>
+  </div>
+</div>
+
+<div class="box">
+  <span class="lbl">Second time &mdash; make it harder</span>
+  Cover the sentence starters and do the role-play again without them. Add one problem of your own: the shop has run out of something else, or you want to ask for a better price.
+</div>
+
+<h3>D2 &middot; Group task: a meal for the whole class</h3>
+<p class="instr">Work in a group of three or four. Together, plan <strong>one meal</strong> you would cook for everyone in this class. Fill in the table, then present your meal to the class.</p>
+
+<table>
+  <thead><tr><th style="width:46%">What we need</th><th style="width:28%">How much / How many</th><th style="width:26%">Countable or uncountable?</th></tr></thead>
+  <tbody>
+    <tr><td><input type="text" class="wide" aria-label="D2 item 1"></td><td><input type="text" class="wide" aria-label="D2 qty 1"></td><td><input type="text" class="wide" aria-label="D2 cu 1"></td></tr>
+    <tr><td><input type="text" class="wide" aria-label="D2 item 2"></td><td><input type="text" class="wide" aria-label="D2 qty 2"></td><td><input type="text" class="wide" aria-label="D2 cu 2"></td></tr>
+    <tr><td><input type="text" class="wide" aria-label="D2 item 3"></td><td><input type="text" class="wide" aria-label="D2 qty 3"></td><td><input type="text" class="wide" aria-label="D2 cu 3"></td></tr>
+    <tr><td><input type="text" class="wide" aria-label="D2 item 4"></td><td><input type="text" class="wide" aria-label="D2 qty 4"></td><td><input type="text" class="wide" aria-label="D2 cu 4"></td></tr>
+    <tr><td><input type="text" class="wide" aria-label="D2 item 5"></td><td><input type="text" class="wide" aria-label="D2 qty 5"></td><td><input type="text" class="wide" aria-label="D2 cu 5"></td></tr>
+    <tr><td><input type="text" class="wide" aria-label="D2 item 6"></td><td><input type="text" class="wide" aria-label="D2 qty 6"></td><td><input type="text" class="wide" aria-label="D2 cu 6"></td></tr>
+  </tbody>
+</table>
+
+<p><strong>Our meal is:</strong> <input type="text" class="mid" aria-label="Our meal"></p>
+<p><strong>We chose it because&hellip;</strong></p>
+<div class="lines"><div></div><div></div></div>
+
+<div class="box teal">
+  <span class="lbl">When you present</span>
+  Each person in the group should say at least one sentence. Try to use <em>a lot of</em>, <em>some</em> and <em>a few</em> while you explain.
+</div>
+
+<!-- ================= PART E ================= -->
+<div class="part e"><span class="letter">E</span><span class="nm">Class discussion<small>All together &mdash; there are no right answers here</small></span></div>
+
+<p class="instr">Talk about these questions as a class. Listen to your classmates and ask them one question each.</p>
+<ol class="q" style="line-height:1.8;">
+  <li>Is it better to cook at home or to buy food that is already made? Why?</li>
+  <li>What food from your region would you want everyone in the world to try?</li>
+  <li>Who taught you to cook? What was the first thing you learned to make?</li>
+  <li>Do you plan your shopping, or decide when you get to the market?</li>
+  <li>Is there a food you could eat every day and never get tired of?</li>
+</ol>
+
+<div class="box teal">
+  <span class="lbl">While you listen</span>
+  Choose one classmate's answer and ask them a follow-up question: <em>Why?</em> &nbsp;<em>How often do you make it?</em> &nbsp;<em>How many people do you cook for?</em>
+</div>
+
+<p class="closing">&ldquo;Little by little, a little becomes a lot.&rdquo;</p>
+
+</div>
+
+<script>
+/* Saves the student's answers on their own device. Nothing is sent anywhere. */
+(function(){
+  var KEY = "week4-food-shopping-worksheet";
+  var fields = Array.prototype.slice.call(document.querySelectorAll('input[type=text]'));
+  var statusEl = document.getElementById('saveStatus');
+  var timer = null;
+
+  fields.forEach(function(el, i){ el.setAttribute('data-k', 'f' + i); });
+
+  function say(msg, warn){
+    if(!statusEl) return;
+    statusEl.textContent = msg;
+    statusEl.style.color = warn ? '#c46a4a' : '#2c6e49';
+  }
+
+  function save(auto){
+    try{
+      var data = {};
+      fields.forEach(function(el){ if(el.value.trim()) data[el.getAttribute('data-k')] = el.value; });
+      localStorage.setItem(KEY, JSON.stringify(data));
+      say(auto ? "Saved automatically." : "Saved on this device.");
+      return true;
+    }catch(e){
+      say("This browser cannot save. Please print your page or write your answers in your notebook.", true);
+      return false;
+    }
+  }
+
+  function restore(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return;
+      var data = JSON.parse(raw), n = 0;
+      fields.forEach(function(el){
+        var v = data[el.getAttribute('data-k')];
+        if(v){ el.value = v; n++; }
+      });
+      if(n) say("Your saved answers are here. Keep going!");
+    }catch(e){ /* nothing saved yet, or storage blocked */ }
+  }
+
+  fields.forEach(function(el){
+    el.addEventListener('input', function(){
+      clearTimeout(timer);
+      timer = setTimeout(function(){ save(true); }, 700);
+    });
+  });
+
+  document.getElementById('saveBtn').addEventListener('click', function(){ save(false); });
+
+  document.getElementById('printBtn').addEventListener('click', function(){
+    save(true);
+    window.print();
+  });
+
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    if(!window.confirm("Clear all your answers on this page?")) return;
+    fields.forEach(function(el){ el.value = ""; });
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    say("Cleared. You can start again.");
+  });
+
+  restore();
+})();
+</script>
+</body>
+</html>
