@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4, Session 1 — Teacher's Guide: Food and Shopping</title>
+<style>
+  :root{
+    --teal:#0d6e6e; --teal-deep:#094f4f; --gold:#d8a24a; --clay:#c46a4a;
+    --paper:#faf7f2; --ink:#1f2a2e; --muted:#5f6b6b; --line:#e6ded2;
+    --green:#2c6e49; --purple:#6d4c7d; --card:#ffffff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Georgia,"Times New Roman",serif; background:var(--paper); color:var(--ink);
+    line-height:1.6; padding:0 18px 70px;}
+  .sheet{max-width:860px; margin:0 auto;}
+
+  header{padding:34px 0 16px; border-bottom:3px solid var(--gold); margin-bottom:24px;}
+  .program{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.72rem; font-weight:bold;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--clay); margin-bottom:10px;}
+  h1{font-size:2.05rem; font-weight:normal; color:var(--teal-deep); line-height:1.15;}
+  .sub{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem; color:var(--muted); font-style:italic; margin-top:8px;}
+
+  h2{font-size:1.3rem; font-weight:normal; color:var(--teal-deep); margin:0 0 12px;
+    padding-bottom:6px; border-bottom:1px solid var(--line);}
+  h3{font-size:1.07rem; font-weight:normal; color:var(--clay); margin:22px 0 8px;}
+  h3 .t{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.82rem; font-weight:bold; color:var(--gold); margin-left:8px;}
+  p{margin-bottom:12px;}
+  section{margin-bottom:26px;}
+
+  /* phase banner */
+  .phase{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    background:var(--teal); color:#fff; border-radius:10px; padding:13px 20px; margin:34px 0 16px;
+  }
+  .phase .nm{font-family:Georgia,serif; font-size:1.35rem;}
+  .phase .nm small{display:block; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.82rem;
+    font-style:italic; opacity:.9; margin-top:3px;}
+  .phase .min{font-family:"Trebuchet MS",Arial,sans-serif; font-weight:bold; color:var(--gold);
+    background:var(--teal-deep); padding:7px 16px; border-radius:18px; white-space:nowrap; font-size:.92rem;}
+
+  ul.steps{list-style:none; margin:10px 0 14px; counter-reset:st;}
+  ul.steps li{counter-increment:st; padding:7px 0 7px 32px; position:relative; line-height:1.6;}
+  ul.steps li::before{content:counter(st) "."; position:absolute; left:2px; top:7px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-weight:bold; color:var(--teal);}
+  ul.dot{list-style:none; margin:8px 0 14px;}
+  ul.dot li{padding:5px 0 5px 20px; position:relative; line-height:1.6;}
+  ul.dot li::before{content:""; position:absolute; left:2px; top:14px; width:7px; height:7px;
+    border-radius:50%; background:var(--gold);}
+
+  .say{font-style:italic; color:var(--teal-deep);}
+  .box{background:#f6f1e9; border-left:4px solid var(--clay); padding:14px 18px; margin:14px 0;
+    border-radius:0 8px 8px 0; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; line-height:1.65;}
+  .box.teal{border-left-color:var(--teal); background:#eef4f2;}
+  .box.green{border-left-color:var(--green); background:#eef4ef;}
+  .box.purple{border-left-color:var(--purple); background:#f2edf4;}
+  .box .lbl{font-weight:bold; color:var(--clay); display:block; margin-bottom:5px; letter-spacing:.03em;}
+  .box.teal .lbl{color:var(--teal);} .box.green .lbl{color:var(--green);} .box.purple .lbl{color:var(--purple);}
+
+  /* differentiation two-up */
+  .diff{display:flex; gap:14px; margin:14px 0; flex-wrap:wrap;}
+  .diff div{flex:1; min-width:230px; border-radius:9px; padding:13px 16px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.9rem; line-height:1.6;}
+  .diff .core{background:#e8f0ee;}
+  .diff .str{background:#f3eaf0;}
+  .diff .tag{display:block; font-size:.72rem; font-weight:bold; letter-spacing:.12em;
+    text-transform:uppercase; margin-bottom:5px;}
+  .diff .core .tag{color:var(--teal);} .diff .str .tag{color:var(--purple);}
+
+  table{width:100%; border-collapse:collapse; margin:12px 0 16px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem;}
+  th{background:var(--teal); color:#fff; text-align:left; font-weight:bold; padding:9px 12px; border:1px solid var(--teal);}
+  td{padding:8px 12px; border:1px solid var(--line); vertical-align:top;}
+  tbody tr:nth-child(odd) td{background:#f6f1e9;}
+  tbody tr:nth-child(even) td{background:#fff;}
+  td.lab{font-weight:bold; color:var(--teal-deep); white-space:nowrap;}
+
+  /* board work */
+  .board{background:#fff; border:2px solid var(--gold); border-radius:10px; padding:16px 20px; margin:12px 0;}
+  .board .bl{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.74rem; font-weight:bold;
+    letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;}
+
+  /* answer key */
+  .key{background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 20px; margin:12px 0;}
+  .key h4{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem; color:var(--teal-deep);
+    margin-bottom:8px; font-weight:bold;}
+  .key ol{margin-left:22px; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem;}
+  .key ol li{padding:2px 0;}
+  .key .inline{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; line-height:1.9;}
+  .key .inline b{color:var(--green);}
+
+  .closing{margin-top:34px; text-align:center; font-style:italic; color:var(--gold); font-size:1.02rem;}
+  .toc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 20px; margin-bottom:8px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem;}
+  .toc a{color:var(--teal-deep); text-decoration:none; display:inline-block; padding:3px 0;}
+  .toc a:hover{text-decoration:underline;}
+
+  @media print{
+    body{background:#fff; padding:0; font-size:10.5pt;}
+    section, .phase, table, .box, .key, .board{page-break-inside:avoid;}
+    .toc{display:none;}
+  }
+  @media(max-width:560px){
+    h1{font-size:1.6rem;}
+    .phase{flex-direction:column; align-items:flex-start;}
+    table{font-size:.85rem;} th,td{padding:7px 9px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header>
+  <div class="program">Free English Program &middot; Teacher's Guide</div>
+  <h1>Week 4, Session 1 &mdash; Food and Shopping</h1>
+  <div class="sub">Mixed level (A2&ndash;B1+) &nbsp;&middot;&nbsp; 90 minutes &nbsp;&middot;&nbsp; Online (Google Meet) &nbsp;&middot;&nbsp; ESA format</div>
+</header>
+
+<div class="toc">
+  <strong>On this page:</strong><br>
+  <a href="#glance">Lesson at a glance</a> &nbsp;&middot;&nbsp;
+  <a href="#before">Before class</a> &nbsp;&middot;&nbsp;
+  <a href="#engage">Engage</a> &nbsp;&middot;&nbsp;
+  <a href="#study">Study</a> &nbsp;&middot;&nbsp;
+  <a href="#activate">Activate</a> &nbsp;&middot;&nbsp;
+  <a href="#wrap">Wrap-up</a> &nbsp;&middot;&nbsp;
+  <a href="#key">Answer key</a> &nbsp;&middot;&nbsp;
+  <a href="#online">Online tips</a>
+</div>
+
+<section id="glance">
+  <h2>Lesson at a glance</h2>
+  <p><strong style="color:var(--teal)">Aim:</strong> Students talk about food, shop for it, and ask about quantities and prices.</p>
+  <p><strong style="color:var(--teal)">Target language:</strong> countable and uncountable nouns; <em>some</em> and <em>any</em>; <em>much</em>, <em>many</em> and <em>a lot of</em>; <em>How much&hellip;?</em> and <em>How many&hellip;?</em>; quantity phrases (<em>a kilo of, a bottle of, a loaf of</em>).</p>
+  <p><strong style="color:var(--teal)">Recycled:</strong> present simple and the third-person &ndash;s; <em>have got</em> from Week 2 (&ldquo;We haven't got any sugar&rdquo;) &mdash; both appear naturally and need no re-teaching.</p>
+  <p><strong style="color:var(--teal)">Materials:</strong> Google Meet with chat and breakout rooms; the student worksheet (sent by link before class); slides.</p>
+  <p><strong style="color:var(--teal)">Skills:</strong> speaking and listening (primary); reading and writing (supporting).</p>
+
+  <div class="box teal">
+    <span class="lbl">How the worksheet fits the lesson</span>
+    The worksheet is organised by activity type, and each part belongs to a different stage of this plan:
+    <strong>Part A</strong> (controlled) in Study &middot; <strong>Part B</strong> (semi-controlled) at the end of Study &middot;
+    <strong>Part C</strong> (individual writing) as homework or for fast finishers &middot;
+    <strong>Part D</strong> (pair and group work) in Activate &middot; <strong>Part E</strong> (class discussion) in Activate or Wrap-up.
+  </div>
+</section>
+
+<section id="before">
+  <h2>Before class</h2>
+  <ul class="dot">
+    <li>Send students the worksheet link the day before and ask them to open it (not complete it) before class.</li>
+    <li>Have a real item or two beside you if you can &mdash; a bag of rice, a bottle of water. Holding something up is the fastest way to teach a quantity phrase.</li>
+    <li>Decide your breakout pairs in advance. Pair a stronger student with a quieter one.</li>
+  </ul>
+</section>
+
+<!-- ============ ENGAGE ============ -->
+<div class="phase" id="engage">
+  <div class="nm">ENGAGE<small>Food vocabulary, fast and personal</small></div>
+  <div class="min">15 min</div>
+</div>
+
+<h3>1 &middot; Three things you ate yesterday <span class="t">6 min &middot; whole class</span></h3>
+<p>A quick round that fills the room with the vocabulary you need, before you teach anything.</p>
+<ul class="steps">
+  <li>Each student types <strong>three foods</strong> they ate yesterday into the chat. One or two words each &mdash; no sentences.</li>
+  <li>Read some aloud. Group them on screen as they come: things you can count on one side, things you cannot on the other &mdash; but <strong>do not explain why yet</strong>.</li>
+  <li>Ask: <span class="say">&ldquo;Why did I put these here and these there?&rdquo;</span> Take guesses. Then move on without confirming.</li>
+</ul>
+<div class="box teal">
+  <span class="lbl">Why this works</span>
+  Students supply the vocabulary themselves, so it is already familiar when the grammar arrives. The silent sorting plants the countable/uncountable question in their minds a full ten minutes before you answer it.
+</div>
+
+<h3>2 &middot; What am I cooking? <span class="t">9 min &middot; whole class</span></h3>
+<ul class="steps">
+  <li>Show a short shopping list on screen, with quantities: <em>a kilo of rice &middot; two onions &middot; some oil &middot; a little salt &middot; 500g of lamb</em>.</li>
+  <li>Students guess the dish. Let them argue about it &mdash; this is the fun part.</li>
+  <li>Then ask each student to type <strong>a shopping list for a dish they love</strong>, without naming the dish. Read two or three out and let the class guess.</li>
+</ul>
+<div class="box">
+  <span class="lbl">Listen for this</span>
+  Students will naturally reach for quantity words here and get some of them wrong (&ldquo;two rice&rdquo;, &ldquo;many sugar&rdquo;). Note two or three. You will use them in the Study phase as real examples from the room, which lands far better than invented ones.
+</div>
+
+<!-- ============ STUDY ============ -->
+<div class="phase" id="study" style="background:var(--clay);">
+  <div class="nm">STUDY<small>Three short blocks, each with practice</small></div>
+  <div class="min">30 min</div>
+</div>
+
+<h3>3 &middot; Countable and uncountable <span class="t">12 min &middot; whole class, then Worksheet A1</span></h3>
+<ul class="steps">
+  <li>Now answer the question from the warm-up. Put two columns on screen and sort the food words together.</li>
+  <li>Draw out the rule from the students rather than stating it: <span class="say">&ldquo;Can I say one rice, two rices? Can I say one apple, two apples?&rdquo;</span></li>
+</ul>
+
+<div class="board">
+  <div class="bl">On the board</div>
+  <table>
+    <thead><tr><th style="width:50%">Countable</th><th>Uncountable</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>an apple &rarr; two apples<br>an egg &rarr; six eggs<br>a tomato &rarr; some tomatoes</td>
+        <td>rice (not &ldquo;two rices&rdquo;)<br>water, milk, bread<br>sugar, oil, cheese, meat</td>
+      </tr>
+      <tr>
+        <td>We can count them.<br>They have a plural form.<br>We can use <strong>a / an</strong>.</td>
+        <td>We cannot count them.<br>They have no plural form.<br>No <strong>a / an</strong> &mdash; use <strong>some</strong>.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ul class="dot">
+  <li>Teach the fix for uncountable nouns we <em>do</em> need to count: a <strong>container or measure</strong> word.</li>
+  <li><em>a bottle of water &middot; a kilo of rice &middot; a loaf of bread &middot; a cup of tea &middot; a bag of flour &middot; a piece of cheese</em></li>
+  <li>Students now do <strong>Worksheet A1</strong> (sort twelve words) in the chat or on the page. Check together, fast.</li>
+</ul>
+
+<div class="box">
+  <span class="lbl">Expect this question</span>
+  Someone will ask about <em>fruit</em>, <em>chicken</em> or <em>coffee</em>. Answer simply: many foods can be both &mdash; <em>chicken</em> is uncountable as meat (&ldquo;some chicken&rdquo;) and countable as an animal (&ldquo;two chickens&rdquo;). Do not go further than that at this level.
+</div>
+
+<h3>4 &middot; some / any &middot; much / many <span class="t">12 min &middot; whole class, then Worksheet A2&ndash;A4</span></h3>
+
+<div class="board">
+  <div class="bl">On the board</div>
+  <table>
+    <thead><tr><th style="width:24%">Word</th><th style="width:34%">When we use it</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td class="lab">some</td><td>positive sentences; offers and requests</td><td>I need <em>some</em> milk. &nbsp;Would you like <em>some</em> tea?</td></tr>
+      <tr><td class="lab">any</td><td>negatives and questions</td><td>We haven't got <em>any</em> eggs. &nbsp;Do you have <em>any</em> rice?</td></tr>
+      <tr><td class="lab">much</td><td>uncountable &mdash; mostly negatives and questions</td><td>There isn't <em>much</em> milk. &nbsp;How <em>much</em> sugar?</td></tr>
+      <tr><td class="lab">many</td><td>countable plural</td><td>We don't have <em>many</em> potatoes. &nbsp;How <em>many</em> eggs?</td></tr>
+      <tr><td class="lab">a lot of</td><td>both &mdash; especially in positive sentences</td><td>We have <em>a lot of</em> rice. &nbsp;She bought <em>a lot of</em> apples.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<ul class="dot">
+  <li>Drill the two questions hard, because students will need them in the role-play: <strong>How much&hellip;?</strong> with uncountable, <strong>How many&hellip;?</strong> with countable plural.</li>
+  <li>Flag the one that is not about quantity at all: <strong>How much is it?</strong> means <em>what is the price</em>. Students use this constantly and often say &ldquo;How many is it?&rdquo;</li>
+  <li>Students do <strong>Worksheet A2, A3 and A4</strong>. Check together.</li>
+</ul>
+
+<div class="diff">
+  <div class="core"><span class="tag">Core &middot; A2</span>Use <em>some</em>, <em>any</em>, <em>How much</em> and <em>How many</em> correctly. Treat <em>a lot of</em> as the safe option for positive sentences.</div>
+  <div class="str"><span class="tag">Stretch &middot; B1+</span>Add <em>a few</em> (countable) and <em>a little</em> (uncountable), and use <em>much</em> and <em>many</em> accurately in negatives.</div>
+</div>
+
+<h3>5 &middot; Semi-controlled practice <span class="t">6 min &middot; pairs &middot; Worksheet B</span></h3>
+<ul class="steps">
+  <li>Breakout pairs. Students do <strong>Worksheet B1</strong> (quantity phrases) and <strong>B2</strong> (the market dialogue) together, saying the answers aloud rather than only writing.</li>
+  <li>Ask one pair to read the completed dialogue to the class as a performance. This doubles as your check.</li>
+</ul>
+<div class="box">
+  <span class="lbl">Monitoring</span>
+  The two errors to collect are &ldquo;How many is it?&rdquo; for price, and <em>some</em> used in questions. Note who says them and fix both at the end for the whole class, without naming anyone.
+</div>
+
+<!-- ============ ACTIVATE ============ -->
+<div class="phase" id="activate" style="background:var(--green);">
+  <div class="nm">ACTIVATE<small>Real shopping, real decisions</small></div>
+  <div class="min">35 min</div>
+</div>
+
+<h3>6 &middot; Role-play: at the market <span class="t">18 min &middot; pairs &middot; Worksheet D1</span></h3>
+<p>The heart of the lesson. Every sentence they need was taught in the last half hour.</p>
+<ul class="steps">
+  <li>Breakout pairs. Student A is the <strong>customer</strong>, Student B is the <strong>shopkeeper</strong>. Their role cards are on the worksheet, and each card tells them something the other does not know.</li>
+  <li>First run (6 min): follow the cards. The customer must buy everything on the list and ask the price.</li>
+  <li><strong>Swap roles</strong> and run it again (6 min), with a twist: the shopkeeper has run out of two items and must offer something else.</li>
+  <li>Back together (6 min): one or two pairs perform. The class listens for one thing &mdash; how the customer asked the price.</li>
+</ul>
+<div class="box green">
+  <span class="lbl">Why the second run matters</span>
+  The first run is reading the cards. The second, with something missing, forces real negotiation &mdash; &ldquo;We haven't got any tomatoes. Would you like some peppers?&rdquo; That is where the language becomes theirs.
+</div>
+<div class="diff">
+  <div class="core"><span class="tag">Core &middot; A2</span>Use the sentence starters printed on the role card.</div>
+  <div class="str"><span class="tag">Stretch &middot; B1+</span>Cover the starters. Add a complication of your own: bargain over the price, or ask for something the shop does not sell.</div>
+</div>
+
+<h3>7 &middot; Group task: a meal for the class <span class="t">17 min &middot; groups of three or four &middot; Worksheet D2</span></h3>
+<ul class="steps">
+  <li>Groups of three or four in breakout rooms. Each group plans <strong>one meal to cook for the whole class</strong>, and fills in the shopping table on the worksheet.</li>
+  <li>They must agree on the dish, list what they need with quantities, and be ready to say why they chose it.</li>
+  <li>Back together: each group presents its meal in about a minute. The class votes for the one they would most like to eat.</li>
+</ul>
+<div class="box">
+  <span class="lbl">Keep the budget light</span>
+  A budget makes groups negotiate, which is good for speaking &mdash; but money can be a sensitive subject. Frame it loosely: &ldquo;Keep it simple and affordable&rdquo; rather than naming a figure, unless your group suggests one themselves.
+</div>
+
+<h3>8 &middot; Class discussion <span class="t">if time allows &middot; Worksheet E</span></h3>
+<p>Use these if the groups finish early, or save them for Session 2. They move students from transactional language into opinion.</p>
+<ul class="dot">
+  <li>Is it better to cook at home or buy food ready-made? Why?</li>
+  <li>What food from your region would you want everyone in the world to try?</li>
+  <li>Who taught you to cook? What was the first thing you learned?</li>
+</ul>
+
+<!-- ============ WRAP-UP ============ -->
+<div class="phase" id="wrap" style="background:var(--purple);">
+  <div class="nm">WRAP-UP<small>Consolidate and close</small></div>
+  <div class="min">10 min</div>
+</div>
+
+<ul class="dot">
+  <li>Put one summary slide up: <em>some / any</em> on one line, <em>much / many / a lot of</em> on the next, <em>How much / How many</em> on the third.</li>
+  <li>Fix the two or three errors you collected, as &ldquo;a few things I heard today&rdquo;, with no names.</li>
+  <li>Praise specific sentences, with names. Praise is safe to attribute; corrections are not.</li>
+  <li><strong>Exit ticket</strong> &mdash; in the chat: (1) one thing you have a lot of in your kitchen; (2) one thing you haven't got any of; (3) one question with <em>How much</em> or <em>How many</em>.</li>
+  <li><strong>Homework:</strong> Worksheet <strong>Part C</strong> &mdash; either writing task. Post it in Google Classroom before the next class.</li>
+</ul>
+
+<div class="box purple">
+  <span class="lbl">Looking ahead</span>
+  Session 2 this week takes the same language into a bigger task &mdash; comparing prices and places to shop &mdash; and is the natural home for the Part E discussion questions if you do not reach them today.
+</div>
+
+<!-- ============ ANSWER KEY ============ -->
+<section id="key" style="margin-top:40px;">
+  <h2>Answer key</h2>
+  <p class="sub" style="margin-top:0;">For the controlled and semi-controlled sections of the student worksheet.</p>
+
+  <div class="key">
+    <h4>A1 &middot; Countable (C) or uncountable (U)?</h4>
+    <div class="inline">
+      1 apple <b>C</b> &nbsp;&middot;&nbsp; 2 rice <b>U</b> &nbsp;&middot;&nbsp; 3 tomato <b>C</b> &nbsp;&middot;&nbsp; 4 water <b>U</b> &nbsp;&middot;&nbsp;
+      5 egg <b>C</b> &nbsp;&middot;&nbsp; 6 bread <b>U</b> &nbsp;&middot;&nbsp; 7 banana <b>C</b> &nbsp;&middot;&nbsp; 8 cheese <b>U</b> &nbsp;&middot;&nbsp;
+      9 onion <b>C</b> &nbsp;&middot;&nbsp; 10 sugar <b>U</b> &nbsp;&middot;&nbsp; 11 potato <b>C</b> &nbsp;&middot;&nbsp; 12 oil <b>U</b>
+    </div>
+  </div>
+
+  <div class="key">
+    <h4>A2 &middot; some or any?</h4>
+    <div class="inline">
+      1 <b>some</b> &nbsp;&middot;&nbsp; 2 <b>any</b> &nbsp;&middot;&nbsp; 3 <b>some</b> (an offer) &nbsp;&middot;&nbsp; 4 <b>any</b> &nbsp;&middot;&nbsp;
+      5 <b>some</b> &nbsp;&middot;&nbsp; 6 <b>any</b> &nbsp;&middot;&nbsp; 7 <b>some</b> (a request) &nbsp;&middot;&nbsp; 8 <b>any</b>
+    </div>
+    <p style="font-family:'Trebuchet MS',Arial,sans-serif; font-size:.87rem; color:var(--muted); margin:8px 0 0;">
+      Items 3 and 7 are the ones worth discussing: they are questions, but we use <em>some</em> because they are an offer and a request.
+    </p>
+  </div>
+
+  <div class="key">
+    <h4>A3 &middot; much or many?</h4>
+    <div class="inline">
+      1 <b>many</b> &nbsp;&middot;&nbsp; 2 <b>much</b> &nbsp;&middot;&nbsp; 3 <b>much</b> &nbsp;&middot;&nbsp; 4 <b>many</b> &nbsp;&middot;&nbsp;
+      5 <b>much</b> (price) &nbsp;&middot;&nbsp; 6 <b>many</b>
+    </div>
+  </div>
+
+  <div class="key">
+    <h4>A4 &middot; How much or How many?</h4>
+    <div class="inline">
+      1 <b>How much</b> &nbsp;&middot;&nbsp; 2 <b>How many</b> &nbsp;&middot;&nbsp; 3 <b>How much</b> (price) &nbsp;&middot;&nbsp; 4 <b>How many</b>
+    </div>
+  </div>
+
+  <div class="key">
+    <h4>B1 &middot; Quantity phrases</h4>
+    <div class="inline">
+      a bottle of <b>water</b> &nbsp;&middot;&nbsp; a kilo of <b>rice</b> &nbsp;&middot;&nbsp; a loaf of <b>bread</b> &nbsp;&middot;&nbsp;
+      a cup of <b>tea</b> &nbsp;&middot;&nbsp; a packet of <b>biscuits</b> &nbsp;&middot;&nbsp; a bag of <b>flour</b>
+    </div>
+  </div>
+
+  <div class="key">
+    <h4>B2 &middot; At the market &mdash; the dialogue</h4>
+    <div class="inline">
+      1 <b>some</b> &nbsp;&middot;&nbsp; 2 <b>much</b> &nbsp;&middot;&nbsp; 3 <b>any</b> &nbsp;&middot;&nbsp;
+      4 <b>some</b> &nbsp;&middot;&nbsp; 5 <b>How many</b> &nbsp;&middot;&nbsp; 6 <b>How much</b>
+    </div>
+  </div>
+
+  <div class="key">
+    <h4>B3 &middot; Write the question</h4>
+    <ol>
+      <li><b>How much rice do you need?</b></li>
+      <li><b>How many eggs do we need?</b> (also fine: &hellip;do you need?)</li>
+      <li><b>How much is it?</b> (also fine: How much does it cost?)</li>
+      <li><b>How many people are there?</b> (also fine: How many people are coming?)</li>
+    </ol>
+    <p style="font-family:'Trebuchet MS',Arial,sans-serif; font-size:.87rem; color:var(--muted); margin:8px 0 0;">
+      Accept any grammatical question that fits the answer. The point is the <em>How much</em> / <em>How many</em> choice, not the exact wording.
+    </p>
+  </div>
+
+  <div class="key">
+    <h4>C, D and E</h4>
+    <p style="font-family:'Trebuchet MS',Arial,sans-serif; font-size:.92rem; margin:0;">
+      Answers will vary. When you mark Part C, check for three things: <em>a / an</em> not used with uncountable nouns,
+      <em>any</em> in negatives and questions, and <em>How much</em> with uncountable nouns and prices.
+    </p>
+  </div>
+</section>
+
+<!-- ============ ONLINE TIPS ============ -->
+<section id="online">
+  <h2>Running this lesson online</h2>
+  <ul class="dot">
+    <li><strong>Hold things up.</strong> A real bag of rice on camera teaches &ldquo;a kilo of rice&rdquo; faster than any slide. Ask students to fetch one thing from their kitchen for the warm-up if they can.</li>
+    <li><strong>Use the chat for the controlled parts.</strong> A1 to A4 go quickly if students type answers rather than taking turns speaking &mdash; and you can see everyone's answer at once.</li>
+    <li><strong>Role-play needs breakout rooms.</strong> Doing it one pair at a time in front of the whole class wastes most of the lesson and frightens the quiet students.</li>
+    <li><strong>Give the listeners a job</strong> during the performances: count how many times the customer uses <em>How much</em> or <em>How many</em>.</li>
+    <li><strong>Food is a safe, warm topic</strong> for this group &mdash; it invites pride and memory rather than difficulty. Let the conversation wander a little when it does.</li>
+  </ul>
+</section>
+
+<p class="closing">&ldquo;Little by little, a little becomes a lot.&rdquo;</p>
+
+</div>
+</body>
+</html>
