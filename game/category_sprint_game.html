@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Category Sprint — Speaking &amp; Listening Lab</title>
+<style>
+  :root{
+    --bg:#0c2733;
+    --bg2:#124152;
+    --panel:#103543;
+    --card:#17505f;
+    --accent:#36e0c0;
+    --accent-2:#ffba49;
+    --good:#7be38a;
+    --text:#eefbff;
+    --muted:#9ec7cf;
+    --line:#1f6577;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Trebuchet MS','Segoe UI',system-ui,sans-serif;
+    background:radial-gradient(circle at 50% 0%,var(--bg2),var(--bg));
+    color:var(--text);height:100vh;display:flex;flex-direction:column;
+    padding:14px 18px;overflow:hidden;
+  }
+  button{font-family:inherit;cursor:pointer;border:none;border-radius:10px;font-weight:bold;transition:transform .08s,filter .15s,background .15s;}
+  button:active{transform:scale(.96);}
+  .btn{background:var(--card);color:var(--text);border:1px solid var(--line);padding:9px 16px;font-size:15px;}
+  .btn:hover{filter:brightness(1.18);}
+  .btn-primary{background:var(--accent);color:#063029;padding:12px 24px;font-size:17px;}
+  .btn-accent{background:var(--accent-2);color:#3a2800;}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0;margin-bottom:12px;flex-wrap:wrap;}
+  .brand{font-size:clamp(20px,2.4vw,30px);font-weight:bold;letter-spacing:1px;color:var(--accent);}
+  .brand span{color:var(--accent-2);}
+  .settings{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .settings label{font-size:13px;color:var(--muted);}
+  .settings input{width:52px;font-size:14px;padding:5px 6px;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--text);text-align:center;}
+  .settings select{font-size:14px;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--text);max-width:230px;}
+
+  .stage{flex:1;display:flex;gap:16px;min-height:0;}
+  .main{flex:1;display:flex;flex-direction:column;min-width:0;}
+
+  .play-card{
+    flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:linear-gradient(160deg,var(--card),var(--bg2));
+    border:2px solid var(--line);border-radius:22px;padding:24px 34px;text-align:center;position:relative;
+  }
+  .cat-eyebrow{font-size:clamp(13px,1.5vw,18px);text-transform:uppercase;letter-spacing:4px;color:var(--accent);font-weight:bold;margin-bottom:16px;}
+  .cat-text{font-size:clamp(30px,4.6vw,60px);font-weight:bold;line-height:1.15;max-width:900px;margin-bottom:8px;}
+  .letter-wrap{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .letter-label{font-size:clamp(14px,1.6vw,19px);color:var(--muted);text-transform:uppercase;letter-spacing:3px;}
+  .letter-big{
+    font-size:clamp(80px,13vw,180px);font-weight:bold;color:var(--accent-2);line-height:1;
+    text-shadow:3px 3px 0 rgba(0,0,0,.3);transition:transform .1s;
+  }
+  .letter-big.spin{animation:flick .06s infinite;}
+  @keyframes flick{50%{transform:translateY(-6px);}}
+  .start-hint{font-size:clamp(20px,2.6vw,30px);color:var(--muted);}
+
+  .controls-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;flex-shrink:0;flex-wrap:wrap;}
+
+  /* Sidebar */
+  .side{width:260px;flex-shrink:0;display:flex;flex-direction:column;gap:14px;}
+  .timer-box{background:var(--panel);border-radius:16px;padding:16px;text-align:center;border:1px solid var(--line);}
+  .timer-display{font-size:62px;font-weight:bold;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1;}
+  .timer-display.warn{color:var(--accent-2);animation:pulse .6s infinite;}
+  @keyframes pulse{50%{opacity:.4;}}
+  .timer-set{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;}
+  .timer-set input{width:60px;font-size:15px;padding:4px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--text);text-align:center;}
+  .timer-btns{display:flex;gap:6px;justify-content:center;margin-top:10px;}
+  .timer-btns .btn{padding:7px 12px;font-size:13px;}
+
+  .scores-box{background:var(--panel);border-radius:16px;padding:14px;border:1px solid var(--line);flex:1;overflow-y:auto;}
+  .scores-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .scores-title{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:bold;}
+  .team{background:var(--bg);border-radius:12px;padding:10px;border:1px solid var(--line);margin-bottom:8px;}
+  .team-name{font-size:15px;font-weight:bold;color:var(--text);background:transparent;border:none;border-bottom:1px dashed var(--line);width:100%;padding:2px 0;margin-bottom:6px;}
+  .team-name:focus{outline:none;border-bottom-color:var(--accent);}
+  .score-row{display:flex;align-items:center;gap:8px;}
+  .score-val{flex:1;font-size:26px;font-weight:bold;color:var(--accent);background:transparent;border:none;text-align:center;font-variant-numeric:tabular-nums;}
+  .score-val:focus{outline:1px solid var(--accent);border-radius:6px;}
+  .mini{padding:3px 10px;font-size:16px;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:6px;font-weight:bold;}
+  .mini:hover{filter:brightness(1.25);}
+  .add-pts{display:flex;gap:4px;justify-content:center;margin-top:5px;}
+  .add-pts button{padding:2px 8px;font-size:12px;background:var(--card);color:var(--muted);border:1px solid var(--line);border-radius:5px;}
+  .add-pts button:hover{filter:brightness(1.3);color:var(--text);}
+
+  /* Welcome */
+  .welcome{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 50% 20%,var(--bg2),var(--bg));display:flex;align-items:center;justify-content:center;padding:30px;transition:opacity .4s;}
+  .welcome.hide{opacity:0;pointer-events:none;}
+  .welcome-card{max-width:740px;width:100%;text-align:center;background:linear-gradient(160deg,var(--panel),var(--bg2));border:2px solid var(--accent);border-radius:24px;padding:42px 48px;box-shadow:0 24px 70px rgba(0,0,0,.5);}
+  .welcome-card .big-title{font-size:clamp(30px,4.5vw,52px);font-weight:bold;color:var(--accent);margin-bottom:6px;}
+  .welcome-card .big-title span{color:var(--accent-2);}
+  .welcome-card .sub{font-size:clamp(17px,2.1vw,23px);color:var(--text);margin-bottom:24px;}
+  .rules{text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px 28px;margin-bottom:26px;}
+  .rules h3{font-size:15px;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;}
+  .rules ol{list-style:none;counter-reset:step;}
+  .rules li{counter-increment:step;position:relative;padding-left:44px;margin-bottom:12px;font-size:clamp(15px,1.9vw,19px);line-height:1.4;}
+  .rules li::before{content:counter(step);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#063029;font-weight:bold;display:flex;align-items:center;justify-content:center;}
+  .rules li b{color:var(--accent);}
+  .scoring-note{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5;}
+</style>
+</head>
+<body>
+
+<div class="welcome" id="welcome">
+  <div class="welcome-card">
+    <div class="big-title">⚡ CATEGORY <span>SPRINT</span></div>
+    <div class="sub">A category, a letter, a timer — how many words can your team list?</div>
+    <div class="rules">
+      <h3>How to play</h3>
+      <ol>
+        <li>I show a <b>category</b> and a <b>letter</b> — for example, <b>Breakfast foods</b> starting with <b>B</b>.</li>
+        <li>In your team, write as many words as you can that fit — before the timer rings!</li>
+        <li>When time's up, each team <b>reads their list aloud.</b></li>
+        <li><b>1 point per correct word.</b> A word no other team has? <b>Bonus point!</b></li>
+      </ol>
+    </div>
+    <button class="btn-primary" id="startGame" style="font-size:22px;padding:15px 40px;">Let's play! ▶</button>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="brand">⚡ CATEGORY <span>SPRINT</span></div>
+  <div class="settings">
+    <label>Category set</label>
+    <select id="packSelect"></select>
+    <label style="margin-left:6px;">Teams</label>
+    <input type="number" id="teamCount" min="2" max="8" value="5">
+    <button class="btn" id="applyTeams">Set</button>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="main">
+    <div class="play-card">
+      <div id="roundBody" style="display:none;width:100%;">
+        <div class="cat-eyebrow" id="catEyebrow">List as many as you can!</div>
+        <div class="cat-text" id="catText"></div>
+        <div class="letter-wrap">
+          <div class="letter-label">starting with the letter</div>
+          <div class="letter-big" id="letterBig">?</div>
+        </div>
+      </div>
+      <div class="start-hint" id="startHint">Press "New round" to begin!</div>
+    </div>
+    <div class="controls-row">
+      <button class="btn-primary" id="newRound">🎲 New round (category + letter)</button>
+      <label style="font-size:13px;color:var(--muted);">Letter:</label>
+      <select id="letterPick" style="font-size:16px;font-weight:bold;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--text);">
+        <option value="">🎲 Random</option>
+      </select>
+      <button class="btn-accent" id="newLetter">🔤 New letter only</button>
+      <button class="btn" id="newCategory">📋 New category only</button>
+    </div>
+  </div>
+
+  <div class="side">
+    <div class="timer-box">
+      <div class="timer-display" id="timer">1:00</div>
+      <div class="timer-set">
+        <label style="font-size:12px;color:var(--muted);">Seconds:</label>
+        <input type="number" id="secInput" min="15" max="300" value="60">
+      </div>
+      <div class="timer-btns">
+        <button class="btn" id="tStart">Start</button>
+        <button class="btn" id="tPause">Pause</button>
+        <button class="btn" id="tReset">Reset</button>
+      </div>
+    </div>
+    <div class="scores-box">
+      <div class="scores-head">
+        <div class="scores-title">Scoreboards</div>
+      </div>
+      <div id="teams"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+
+// ---------- Category packs ----------
+const PACKS={
+  "Everyday mix":[
+    "Breakfast foods","Animals","Things in a kitchen","Jobs","Countries","Colours","Fruits or vegetables",
+    "Things you wear","Sports","Things in a classroom","Drinks","Things in a city","Parts of the body",
+    "Things that are cold","Hobbies","Things in a bathroom","Family members","Means of transport",
+  ],
+  "Food & drink":[
+    "Breakfast foods","Fruits","Vegetables","Things in a fridge","Desserts","Drinks","Fast food",
+    "Things you put on bread","Spices or herbs","Food from another country","Things that are sweet","Snacks",
+  ],
+  "Around the world":[
+    "Countries","Cities","Languages","Famous landmarks","Nationalities","Things you pack for a trip",
+    "Ways to travel","Things at an airport","World rivers or mountains","Things you see at the beach",
+  ],
+  "People & jobs":[
+    "Jobs","Jobs with a uniform","Jobs that help people","Famous people","Family members","Feelings or emotions",
+    "Ways to describe a person","Things a teacher uses","Places people work","Things a doctor does",
+  ],
+  "Harder / B1+":[
+    "Things that are round","Things that make noise","Things that are dangerous","Abstract nouns (ideas)",
+    "Things you can recycle","Words about the weather","Things with a screen","Things that come in pairs",
+    "Things you do with water","Words that mean 'happy'","Things you find in an office","Things that fly",
+  ],
+};
+const LETTERS="BCDFGHLMPRSTACEIO"; // common, forgiving set (avoids tricky q/x/z)
+
+// ---------- State ----------
+let pack="Everyday mix", curCat="", curLetter="";
+let teams=[];
+
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function newCategory(){
+  curCat=pick(PACKS[pack]);
+  render();
+}
+function newLetter(){
+  const chosen=$('letterPick').value;
+  const el=$('letterBig');
+  if(chosen){ // teacher picked a specific letter — show it directly, no spin
+    curLetter=chosen; el.classList.remove('spin'); el.textContent=curLetter; return;
+  }
+  // otherwise spin to a random letter
+  el.classList.add('spin');
+  let spins=0;
+  const iv=setInterval(()=>{
+    el.textContent=LETTERS[Math.floor(Math.random()*LETTERS.length)];
+    spins++;
+    if(spins>10){ clearInterval(iv); el.classList.remove('spin'); curLetter=LETTERS[Math.floor(Math.random()*LETTERS.length)]; el.textContent=curLetter; }
+  },60);
+}
+function newRound(){
+  $('startHint').style.display='none';
+  $('roundBody').style.display='block';
+  curCat=pick(PACKS[pack]);
+  $('catText').textContent=curCat;
+  newLetter();
+  resetTimer(); startTimer();
+}
+function render(){
+  $('startHint').style.display='none';
+  $('roundBody').style.display='block';
+  $('catText').textContent=curCat||pick(PACKS[pack]);
+  $('letterBig').textContent=curLetter||'?';
+}
+
+// ---------- Teams ----------
+const DEFAULT_NAMES=['Team 1','Team 2','Team 3','Team 4','Team 5','Team 6','Team 7','Team 8'];
+function buildTeams(n){
+  const prev={}; teams.forEach(t=>prev[t.id]=t);
+  teams=[];
+  for(let i=0;i<n;i++) teams.push(prev[i]||{id:i,name:DEFAULT_NAMES[i],score:0});
+  renderTeams();
+}
+function renderTeams(){
+  const box=$('teams'); box.innerHTML='';
+  teams.forEach(t=>{
+    const d=document.createElement('div');
+    d.className='team';
+    d.innerHTML=`
+      <input class="team-name" value="${t.name.replace(/"/g,'&quot;')}" data-id="${t.id}">
+      <div class="score-row">
+        <button class="mini" data-add="${t.id}" data-amt="-1">−</button>
+        <input class="score-val" type="number" value="${t.score}" data-score="${t.id}">
+        <button class="mini" data-add="${t.id}" data-amt="1">+</button>
+      </div>
+      <div class="add-pts">
+        <button data-add="${t.id}" data-amt="5">+5</button>
+        <button data-add="${t.id}" data-amt="3">+3</button>
+        <button data-add="${t.id}" data-amt="2">+2</button>
+      </div>`;
+    box.appendChild(d);
+  });
+  box.querySelectorAll('.team-name').forEach(inp=>inp.addEventListener('input',e=>teams[+e.target.dataset.id].name=e.target.value));
+  box.querySelectorAll('.score-val').forEach(inp=>inp.addEventListener('change',e=>{teams[+e.target.dataset.score].score=parseInt(e.target.value||0,10);}));
+  box.querySelectorAll('[data-add]').forEach(b=>b.addEventListener('click',e=>{
+    const id=+e.currentTarget.dataset.add, amt=+e.currentTarget.dataset.amt;
+    teams[id].score+=amt; renderTeams();
+  }));
+}
+
+// ---------- Timer ----------
+let remaining=60, ticker=null, running=false;
+function fmt(s){const m=Math.floor(s/60);const ss=s%60;return m+':'+(ss<10?'0':'')+ss;}
+function getSecs(){return parseInt($('secInput').value||60,10);}
+function updateTimer(){$('timer').textContent=fmt(Math.max(0,remaining));$('timer').classList.toggle('warn',remaining<=10&&remaining>0);}
+function startTimer(){if(running)return;running=true;ticker=setInterval(()=>{remaining--;updateTimer();if(remaining<=0){stopTimer();ringBell();}},1000);}
+function stopTimer(){running=false;if(ticker){clearInterval(ticker);ticker=null;}}
+function resetTimer(){stopTimer();remaining=getSecs();$('timer').classList.remove('warn');updateTimer();}
+function ringBell(){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    [0,0.22,0.44,0.66].forEach(delay=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.type='sine';o.frequency.value=880;o.connect(g);g.connect(ctx.destination);
+      const t=ctx.currentTime+delay;
+      g.gain.setValueAtTime(0.001,t);
+      g.gain.exponentialRampToValueAtTime(0.5,t+0.02);
+      g.gain.exponentialRampToValueAtTime(0.001,t+0.6);
+      o.start(t);o.stop(t+0.65);
+    });
+  }catch(e){}
+}
+
+// ---------- Wire up ----------
+function initPacks(){
+  const sel=$('packSelect');
+  Object.keys(PACKS).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=k;sel.appendChild(o);});
+  sel.addEventListener('change',e=>{ pack=e.target.value; });
+}
+function initLetterPick(){
+  const sel=$('letterPick');
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(L=>{const o=document.createElement('option');o.value=L;o.textContent=L;sel.appendChild(o);});
+  // choosing a letter updates the board immediately (if a round is showing)
+  sel.addEventListener('change',e=>{
+    if(e.target.value){ curLetter=e.target.value; if($('roundBody').style.display!=='none'){ $('letterBig').classList.remove('spin'); $('letterBig').textContent=curLetter; } }
+  });
+}
+$('startGame').addEventListener('click',()=>{ const w=$('welcome'); w.classList.add('hide'); setTimeout(()=>{w.style.display='none';},400); });
+$('newRound').addEventListener('click',newRound);
+$('newLetter').addEventListener('click',()=>{ $('roundBody').style.display='block'; $('startHint').style.display='none'; if(!curCat){curCat=pick(PACKS[pack]);$('catText').textContent=curCat;} newLetter(); });
+$('newCategory').addEventListener('click',()=>{ $('roundBody').style.display='block'; $('startHint').style.display='none'; newCategory(); if(!curLetter){$('letterBig').textContent='?';} });
+$('tStart').addEventListener('click',startTimer);
+$('tPause').addEventListener('click',stopTimer);
+$('tReset').addEventListener('click',resetTimer);
+$('applyTeams').addEventListener('click',()=>{buildTeams(Math.min(8,Math.max(2,parseInt($('teamCount').value||5,10))));});
+$('secInput').addEventListener('change',()=>{if(!running){remaining=getSecs();updateTimer();}});
+
+// ---------- Init ----------
+initPacks();
+initLetterPick();
+buildTeams(5);
+resetTimer();
+</script>
+</body>
+</html>
