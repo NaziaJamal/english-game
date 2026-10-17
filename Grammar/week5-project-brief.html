@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project — Welcome to My Town</title>
+<style>
+  :root{
+    --teal:#0d6e6e; --teal-deep:#094f4f; --gold:#d8a24a; --clay:#c46a4a;
+    --paper:#faf7f2; --ink:#1f2a2e; --muted:#5f6b6b; --line:#e6ded2;
+    --green:#2c6e49; --purple:#6d4c7d; --card:#ffffff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{font-family:Georgia,"Times New Roman",serif; background:var(--paper); color:var(--ink);
+    line-height:1.65; padding:0 18px 70px;}
+  .sheet{max-width:820px; margin:0 auto;}
+
+  header{padding:32px 0 16px; border-bottom:3px solid var(--gold); margin-bottom:10px;}
+  .program{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.72rem; font-weight:bold;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--clay); margin-bottom:10px;}
+  h1{font-size:2.1rem; font-weight:normal; color:var(--teal-deep); line-height:1.15;}
+  .sub{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem; color:var(--muted);
+    font-style:italic; margin-top:8px;}
+
+  /* toolbar */
+  .toolbar{
+    position:sticky; top:0; z-index:30; background:var(--paper);
+    border-bottom:1px solid var(--line); padding:12px 0 11px;
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+  }
+  .toolbar button{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; font-weight:bold;
+    padding:11px 20px; border-radius:10px; border:none; cursor:pointer;
+    min-height:46px; transition:transform .1s;
+  }
+  .toolbar button:active{transform:scale(.97);}
+  .tb-dl{background:var(--teal); color:#fff; box-shadow:0 3px 0 #073c3c;}
+  .tb-share{background:var(--gold); color:#3a2a10; box-shadow:0 3px 0 #a9791f;}
+  .tb-clear{background:transparent; color:var(--muted); border:2px solid var(--line)!important;}
+  .savenote{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.85rem; color:var(--green);
+    margin-left:4px; min-height:1.2em; flex:1; min-width:170px;}
+
+  h2{font-size:1.3rem; font-weight:normal; color:var(--teal-deep); margin:30px 0 12px;
+    padding-bottom:6px; border-bottom:1px solid var(--line);}
+  h2 .num{color:var(--clay); font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem;
+    font-weight:bold; margin-right:8px;}
+  h3{font-size:1.06rem; font-weight:normal; color:var(--clay); margin:22px 0 6px;}
+  .instr{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; color:var(--muted);
+    font-style:italic; margin-bottom:14px;}
+  p{margin-bottom:12px;}
+
+  /* the headline facts */
+  .facts{display:flex; gap:12px; margin:18px 0 6px; flex-wrap:wrap;}
+  .fact{flex:1; min-width:150px; background:#fff; border:1px solid var(--line);
+    border-top:4px solid var(--teal); border-radius:4px 4px 10px 10px; padding:14px 16px;
+    font-family:"Trebuchet MS",Arial,sans-serif;}
+  .fact .fl{display:block; font-size:.68rem; font-weight:bold; letter-spacing:.13em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:5px;}
+  .fact .fv{display:block; font-family:Georgia,serif; font-size:1.12rem; color:var(--teal-deep); line-height:1.3;}
+  .fact:nth-child(2){border-top-color:var(--clay);}
+  .fact:nth-child(3){border-top-color:var(--green);}
+  .fact:nth-child(4){border-top-color:var(--purple);}
+
+  /* must-include list */
+  ol.must{list-style:none; counter-reset:m; margin:10px 0 16px;}
+  ol.must li{counter-increment:m; position:relative; padding:9px 0 9px 44px; line-height:1.6;
+    border-bottom:1px dashed var(--line);}
+  ol.must li:last-child{border-bottom:none;}
+  ol.must li::before{
+    content:counter(m); position:absolute; left:0; top:11px; width:28px; height:28px;
+    border-radius:50%; background:var(--teal); color:#fff;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.85rem; font-weight:bold;
+    display:flex; align-items:center; justify-content:center;
+  }
+  ol.must li b{color:var(--teal-deep);}
+  ol.must li .ex{display:block; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.87rem;
+    color:var(--muted); font-style:italic; margin-top:3px;}
+
+  /* option cards */
+  .opts{display:flex; gap:12px; margin:14px 0 6px; flex-wrap:wrap;}
+  .optcard{
+    flex:1; min-width:210px; background:#fff; border:2px solid var(--line); border-radius:12px;
+    padding:15px 17px; cursor:pointer; transition:.15s; text-align:left;
+    font-family:"Trebuchet MS",Arial,sans-serif;
+  }
+  .optcard:hover{border-color:var(--purple);}
+  .optcard .on{display:block; font-size:.72rem; font-weight:bold; letter-spacing:.11em;
+    text-transform:uppercase; color:var(--purple); margin-bottom:5px;}
+  .optcard .ti{display:block; font-family:Georgia,serif; font-size:1.1rem; color:var(--teal-deep); margin-bottom:5px;}
+  .optcard .de{display:block; font-size:.87rem; color:var(--muted); line-height:1.55;}
+  .optcard.on-sel{border-color:var(--purple); background:#f7f3f9; box-shadow:0 4px 14px rgba(109,76,125,.15);}
+  .optcard.on-sel .on::after{content:"  \2014  chosen";}
+
+  /* planning form */
+  input[type=text]{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.98rem; color:var(--ink);
+    border:none; border-bottom:2px solid var(--teal); background:#f3efe7;
+    padding:5px 9px; border-radius:4px 4px 0 0; width:100%;
+  }
+  input[type=text]:focus{outline:none; background:#e9f1ef;}
+  input.name{width:220px; font-weight:bold; color:var(--teal-deep);}
+  .namebar{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; color:var(--muted);
+    padding:14px 0 20px; border-bottom:1px solid var(--line); margin-bottom:24px;}
+
+  table{width:100%; border-collapse:collapse; margin:12px 0 16px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.94rem;}
+  th{background:var(--teal); color:#fff; text-align:left; font-weight:bold; padding:9px 12px; border:1px solid var(--teal);}
+  td{padding:8px 12px; border:1px solid var(--line); vertical-align:middle;}
+  tbody tr:nth-child(odd) td{background:#f6f1e9;}
+  tbody tr:nth-child(even) td{background:#fff;}
+  td.n{font-weight:bold; color:var(--teal-deep); width:44px; text-align:center;}
+
+  textarea{
+    width:100%; min-height:110px; border:2px solid var(--line); border-radius:11px;
+    padding:14px 16px; background:#fff; color:var(--ink);
+    font-family:Georgia,"Times New Roman",serif; font-size:1rem; line-height:1.85;
+    resize:vertical; overflow:hidden;
+  }
+  textarea:focus{outline:none; border-color:var(--teal);}
+
+  /* live check */
+  .check{display:flex; gap:9px; flex-wrap:wrap; margin:12px 0 4px; font-family:"Trebuchet MS",Arial,sans-serif;}
+  .chip{background:#fff; border:2px solid var(--line); border-radius:24px;
+    padding:8px 15px; font-size:.86rem; color:var(--muted); line-height:1.3;}
+  .chip b{color:var(--teal-deep);}
+  .chip.done{border-color:var(--green); background:#eef4ef; color:var(--green);}
+  .chip.done b{color:var(--green);}
+  .chip.done::before{content:"\2713  "; font-weight:bold;}
+
+  /* language support */
+  .lang{background:#fff; border:2px solid var(--gold); border-radius:10px; padding:14px 18px;
+    margin:14px 0; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; line-height:1.95;}
+  .lang b.h{display:block; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--clay); margin-bottom:6px;}
+  .lang .ph{color:var(--teal-deep); font-weight:bold;}
+
+  .box{background:#f6f1e9; border-left:4px solid var(--clay); padding:13px 18px; margin:16px 0;
+    border-radius:0 8px 8px 0; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; line-height:1.65;}
+  .box.teal{border-left-color:var(--teal); background:#eef4f2;}
+  .box.purple{border-left-color:var(--purple); background:#f2edf4;}
+  .box.green{border-left-color:var(--green); background:#eef4ef;}
+  .box .lbl{font-weight:bold; color:var(--clay); display:block; margin-bottom:4px; letter-spacing:.03em;}
+  .box.teal .lbl{color:var(--teal);} .box.purple .lbl{color:var(--purple);} .box.green .lbl{color:var(--green);}
+
+  ul.dot{list-style:none; margin:8px 0 14px;}
+  ul.dot li{padding:5px 0 5px 20px; position:relative; line-height:1.6;}
+  ul.dot li::before{content:""; position:absolute; left:2px; top:14px; width:7px; height:7px;
+    border-radius:50%; background:var(--gold);}
+
+  .closing{margin-top:32px; text-align:center; font-style:italic; color:var(--gold); font-size:1.02rem;}
+  .printonly{display:none; white-space:pre-wrap; font-family:Georgia,serif; font-size:1rem; line-height:1.85;}
+
+  @media print{
+    body{background:#fff; padding:0; font-size:11pt;}
+    .toolbar, .check, .optcard:not(.on-sel){display:none!important;}
+    input[type=text]{background:transparent; border-bottom:1px solid #555;}
+    textarea{display:none;}
+    .printonly{display:block; border:1px solid #bbb; border-radius:8px; padding:11px 13px; min-height:90px;}
+    table, .box, .lang, .facts, ol.must li, .optcard{page-break-inside:avoid;}
+  }
+  @media(max-width:560px){
+    h1{font-size:1.55rem;}
+    .optcard, .fact{min-width:100%;}
+    input.name{width:100%;}
+    table{font-size:.86rem; table-layout:fixed;}
+    th,td{padding:7px 8px; overflow-wrap:anywhere;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header>
+  <div class="program">Free English Program &middot; Project</div>
+  <h1>Welcome to My Town</h1>
+  <div class="sub">Prepare at home &nbsp;&middot;&nbsp; present to the class next week</div>
+</header>
+
+<div class="toolbar">
+  <button type="button" class="tb-dl" id="dlBtn">Download my plan</button>
+  <button type="button" class="tb-share" id="shareBtn">Share my plan</button>
+  <button type="button" class="tb-clear" id="clearBtn">Clear</button>
+  <span class="savenote" id="saveStatus"></span>
+</div>
+
+<div class="namebar">
+  Name: <input type="text" class="name" id="fName" aria-label="Your name">
+</div>
+
+<div class="facts">
+  <div class="fact"><span class="fl">What</span><span class="fv">A short talk about a town</span></div>
+  <div class="fact"><span class="fl">How long</span><span class="fv">2 to 3 minutes</span></div>
+  <div class="fact"><span class="fl">Bring</span><span class="fv">A simple map, drawn by hand</span></div>
+  <div class="fact"><span class="fl">When</span><span class="fv">Our next class</span></div>
+</div>
+
+<div class="box teal">
+  <span class="lbl">Why we are doing this</span>
+  We do not have a second class this week, so this project takes its place. Everything you need is
+  language you already have from this week &mdash; <b>there is</b>, <b>there are</b>, and the
+  prepositions of place. This is your chance to use all of it at once, in your own words.
+</div>
+
+<!-- ============ 1 ============ -->
+<section>
+  <h2><span class="num">1</span>Choose your town</h2>
+  <p class="instr">Tap one. All three are equally good, and nobody will know which one you chose unless you say.</p>
+
+  <div class="opts">
+    <button type="button" class="optcard" data-opt="1">
+      <span class="on">Option 1</span>
+      <span class="ti">Invent a town</span>
+      <span class="de">Build it yourself. You decide everything &mdash; the name, the streets, what
+        is in it. This is the easiest one to make interesting.</span>
+    </button>
+    <button type="button" class="optcard" data-opt="2">
+      <span class="on">Option 2</span>
+      <span class="ti">A place you know</span>
+      <span class="de">Somewhere you have visited and liked. Not the street where you live &mdash;
+        choose a public place: a park, a bazaar, an old part of a city.</span>
+    </button>
+    <button type="button" class="optcard" data-opt="3">
+      <span class="on">Option 3</span>
+      <span class="ti">A famous city</span>
+      <span class="de">Anywhere in the world. You do not have to have been there. Look it up, and
+        tell us what is there.</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section>
+  <h2><span class="num">2</span>What your talk must include</h2>
+
+  <ol class="must">
+    <li><b>The name of your town</b>, and one sentence about it.
+      <span class="ex">Welcome to Sangbar. It is a small town between two mountains.</span></li>
+    <li><b>At least five places</b>, using <b>there is</b> and <b>there are</b>.
+      <span class="ex">There is a market in the center. There are two schools.</span></li>
+    <li><b>Where things are</b> &mdash; at least four prepositions of place.
+      <span class="ex">next to &middot; between &middot; across from &middot; in front of &middot; behind &middot; near &middot; at the end of</span></li>
+    <li><b>One thing that makes it special</b> &mdash; something no other town has.
+      <span class="ex">In our town there is a bridge made of glass.</span></li>
+    <li><b>A question for the class</b> at the end.
+      <span class="ex">Would you like to live in my town? Why?</span></li>
+  </ol>
+
+  <div class="box">
+    <span class="lbl">Your map</span>
+    Draw it by hand on a piece of paper and hold it up to the camera. It does not need to be
+    beautiful &mdash; boxes with names in them are perfect. If you cannot show a drawing, type the
+    list of places in the chat instead. You do not need any app.
+  </div>
+
+  <div class="box purple">
+    <span class="lbl">If you want more &mdash; B1+</span>
+    <ul class="dot" style="margin:6px 0 0">
+      <li>Say what your town <b>does not</b> have, using <em>there isn't</em> or <em>there aren't any</em>.</li>
+      <li>Give <b>directions</b> from one place to another. The phrases are in the box below.</li>
+      <li>Answer the class's questions <b>without looking at your notes</b>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section>
+  <h2><span class="num">3</span>Language you can use</h2>
+
+  <div class="lang">
+    <b class="h">Starting and finishing</b>
+    <span class="ph">Welcome to&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">Today I want to tell you about&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">First&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">Next to that&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">Also&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">Finally&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">Thank you. Do you have any questions?</span>
+  </div>
+
+  <div class="lang">
+    <b class="h">Saying what is there</b>
+    <span class="ph">There is a&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">There are two&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">There isn't any&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">There aren't any&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">In the center there is&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">It is next to&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">It is across from&hellip;</span> &nbsp;&middot;&nbsp;
+    <span class="ph">At the end of the street there is&hellip;</span>
+  </div>
+
+  <div class="lang">
+    <b class="h">Giving directions &mdash; for B1+</b>
+    <span class="ph">Go straight ahead.</span> &nbsp;&middot;&nbsp;
+    <span class="ph">Turn left. / Turn right.</span> &nbsp;&middot;&nbsp;
+    <span class="ph">Take the first street on your right.</span> &nbsp;&middot;&nbsp;
+    <span class="ph">Go past the school.</span> &nbsp;&middot;&nbsp;
+    <span class="ph">It is on your left.</span> &nbsp;&middot;&nbsp;
+    <span class="ph">It is at the end of the road.</span>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section>
+  <h2><span class="num">4</span>Plan your talk</h2>
+  <p class="instr">Fill this in as you prepare. It saves on your own phone, and you can download it
+    or send it to your teacher before the class.</p>
+
+  <h3>My town is called</h3>
+  <input type="text" id="fTown" aria-label="The name of your town">
+
+  <h3>My opening sentence</h3>
+  <input type="text" id="fOpen" aria-label="Your opening sentence">
+
+  <h3>The places in my town</h3>
+  <p class="instr">Five is the minimum. Write where each one is, not only what it is.</p>
+  <table>
+    <thead><tr><th style="width:44px">#</th><th style="width:40%">Place</th><th>Where is it?</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td><input type="text" id="p1" aria-label="Place 1"></td><td><input type="text" id="w1" aria-label="Where is place 1"></td></tr>
+      <tr><td class="n">2</td><td><input type="text" id="p2" aria-label="Place 2"></td><td><input type="text" id="w2" aria-label="Where is place 2"></td></tr>
+      <tr><td class="n">3</td><td><input type="text" id="p3" aria-label="Place 3"></td><td><input type="text" id="w3" aria-label="Where is place 3"></td></tr>
+      <tr><td class="n">4</td><td><input type="text" id="p4" aria-label="Place 4"></td><td><input type="text" id="w4" aria-label="Where is place 4"></td></tr>
+      <tr><td class="n">5</td><td><input type="text" id="p5" aria-label="Place 5"></td><td><input type="text" id="w5" aria-label="Where is place 5"></td></tr>
+      <tr><td class="n">6</td><td><input type="text" id="p6" aria-label="Place 6"></td><td><input type="text" id="w6" aria-label="Where is place 6"></td></tr>
+    </tbody>
+  </table>
+
+  <h3>What makes my town special</h3>
+  <input type="text" id="fSpecial" aria-label="What makes your town special">
+
+  <h3>My question for the class</h3>
+  <input type="text" id="fQuestion" aria-label="Your question for the class">
+
+  <h3>My notes</h3>
+  <p class="instr">Write the sentences you want to say. Do not read them out in class &mdash; look
+    at them once before you start, then talk.</p>
+  <textarea id="fNotes" placeholder="Welcome to Sangbar. It is a small town between two mountains. In the center there is a market&hellip;" aria-label="Your notes"></textarea>
+  <div class="printonly" id="notesPrint"></div>
+
+  <div class="check" id="checkRow">
+    <span class="chip" id="cPlaces"></span>
+    <span class="chip" id="cThere"></span>
+    <span class="chip" id="cPrep"></span>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section>
+  <h2><span class="num">5</span>What a good talk looks like</h2>
+  <p class="instr">This is what your teacher and your classmates will be listening for.</p>
+
+  <table>
+    <thead><tr><th style="width:30%">We will listen for</th><th>What that means</th></tr></thead>
+    <tbody>
+      <tr><td class="n" style="width:auto; text-align:left; font-weight:bold; color:var(--teal-deep); white-space:normal">You used the grammar</td>
+          <td>At least five sentences with <b>there is</b> or <b>there are</b>, and four prepositions of place.</td></tr>
+      <tr><td style="font-weight:bold; color:var(--teal-deep)">We could follow it</td>
+          <td>You said things in an order that made sense, and we could picture the town.</td></tr>
+      <tr><td style="font-weight:bold; color:var(--teal-deep)">You talked, not read</td>
+          <td>You looked up from your notes. Pauses are fine. Reading every word is not.</td></tr>
+      <tr><td style="font-weight:bold; color:var(--teal-deep)">You answered a question</td>
+          <td>Somebody asked you something, and you answered in a full sentence.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box green">
+    <span class="lbl">Practice out loud, at least twice</span>
+    Reading your notes silently is not practice. Say the whole thing out loud, to yourself, to a
+    family member, or into your phone. The second time is always better than the first, and the
+    class will hear the difference.
+  </div>
+
+  <div class="box">
+    <span class="lbl">If you are nervous</span>
+    Everyone is. You may hold your notes, you may pause, and you may say
+    <em>&ldquo;Sorry, let me start that again.&rdquo;</em> &mdash; that is real English and nobody
+    will mind. Three minutes is shorter than it sounds.
+  </div>
+</section>
+
+<p class="closing">&ldquo;Little by little, a little becomes a lot.&rdquo;</p>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY = "week5-project-plan";
+  var OPT = {
+    "1":"Option 1 — Invent a town",
+    "2":"Option 2 — A place you know",
+    "3":"Option 3 — A famous city"
+  };
+  var el = function(id){ return document.getElementById(id); };
+  var IDS = ["fName","fTown","fOpen","fSpecial","fQuestion",
+             "p1","w1","p2","w2","p3","w3","p4","w4","p5","w5","p6","w6"];
+  var notes = el("fNotes"), statusEl = el("saveStatus");
+  var chosen = "", timer = null;
+
+  function say(msg, warn){
+    statusEl.textContent = msg;
+    statusEl.style.color = warn ? "#c46a4a" : "#2c6e49";
+  }
+
+  function grow(){
+    notes.style.height = "auto";
+    notes.style.height = Math.max(notes.scrollHeight, 110) + "px";
+  }
+
+  /* ---------- live check ---------- */
+  var PREPS = ["next to","between","across from","opposite","in front of","behind","near",
+               "at the end of","on the corner of","under","above","below","beside","inside","outside",
+               "in the center","in the centre","in the middle"];
+
+  function countPlaces(){
+    var n = 0;
+    for(var i = 1; i <= 6; i++){ if(el("p" + i).value.trim()) n++; }
+    return n;
+  }
+  function allText(){
+    var s = notes.value + " ";
+    for(var i = 1; i <= 6; i++){ s += el("w" + i).value + " "; }
+    s += el("fOpen").value + " " + el("fSpecial").value;
+    return s;
+  }
+  function countThere(s){
+    var a = s.match(/\bthere\s+(is|are|isn'?t|aren'?t|is\s+not|are\s+not|was|were)\b/gi) || [];
+    var b = s.match(/\bthere'?s\b/gi) || [];
+    return a.length + b.length;
+  }
+  function countPreps(s){
+    var low = " " + s.toLowerCase() + " ", found = 0;
+    for(var i = 0; i < PREPS.length; i++){
+      var re = new RegExp("(^|[^a-z])" + PREPS[i].replace(/ /g, "\\s+") + "([^a-z]|$)", "g");
+      var m = low.match(re);
+      if(m) found += m.length;
+    }
+    return found;
+  }
+  function chip(node, label, have, need){
+    node.innerHTML = label + ": <b>" + have + "</b> of " + need;
+    node.className = "chip" + (have >= need ? " done" : "");
+  }
+  function refresh(){
+    var s = allText();
+    chip(el("cPlaces"), "Places", countPlaces(), 5);
+    chip(el("cThere"),  "there is / there are", countThere(s), 5);
+    chip(el("cPrep"),   "Prepositions of place", countPreps(s), 4);
+  }
+
+  /* ---------- saving ---------- */
+  function save(auto){
+    try{
+      var d = { o: chosen, notes: notes.value };
+      IDS.forEach(function(k){ d[k] = el(k).value; });
+      localStorage.setItem(KEY, JSON.stringify(d));
+      say(auto ? "Saved automatically." : "Saved on this device.");
+      return true;
+    }catch(e){
+      say("This browser cannot save. Please download your plan before you close the page.", true);
+      return false;
+    }
+  }
+  function restore(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return;
+      var d = JSON.parse(raw);
+      IDS.forEach(function(k){ if(d[k]) el(k).value = d[k]; });
+      if(d.notes) notes.value = d.notes;
+      if(d.o) pick(d.o);
+      if(d.notes || d.fTown) say("Your saved plan is here. Keep going!");
+    }catch(e){ /* nothing saved yet, or storage blocked */ }
+  }
+  function touched(){
+    clearTimeout(timer);
+    timer = setTimeout(function(){ save(true); }, 700);
+  }
+
+  IDS.forEach(function(k){
+    el(k).addEventListener("input", function(){ refresh(); touched(); });
+  });
+  notes.addEventListener("input", function(){ grow(); refresh(); touched(); });
+
+  /* ---------- option ---------- */
+  function pick(v){
+    chosen = String(v);
+    var c = document.querySelectorAll(".optcard");
+    for(var i = 0; i < c.length; i++){
+      c[i].classList.toggle("on-sel", c[i].getAttribute("data-opt") === chosen);
+    }
+  }
+  var cards = document.querySelectorAll(".optcard");
+  for(var i = 0; i < cards.length; i++){
+    cards[i].addEventListener("click", function(){ pick(this.getAttribute("data-opt")); touched(); });
+  }
+
+  /* ---------- build the plan as text ---------- */
+  function buildText(){
+    var s = allText();
+    var L = [];
+    L.push("PROJECT PLAN - WELCOME TO MY TOWN");
+    L.push("Free English Program");
+    L.push("");
+    L.push("Name: " + (el("fName").value || "-"));
+    L.push("Chosen task: " + (OPT[chosen] || "not chosen"));
+    L.push("Town: " + (el("fTown").value || "-"));
+    L.push("");
+    L.push("OPENING SENTENCE");
+    L.push(el("fOpen").value || "-");
+    L.push("");
+    L.push("PLACES IN MY TOWN");
+    for(var i = 1; i <= 6; i++){
+      var p = el("p" + i).value.trim(), w = el("w" + i).value.trim();
+      if(p || w) L.push("  " + i + ". " + (p || "-") + "  --  " + (w || "-"));
+    }
+    L.push("");
+    L.push("WHAT MAKES IT SPECIAL");
+    L.push(el("fSpecial").value || "-");
+    L.push("");
+    L.push("MY QUESTION FOR THE CLASS");
+    L.push(el("fQuestion").value || "-");
+    if(notes.value.trim()){
+      L.push("");
+      L.push("MY NOTES");
+      L.push(notes.value.trim());
+    }
+    L.push("");
+    L.push("SELF-CHECK");
+    L.push(countPlaces() + " places  |  " + countThere(s) + " x there is/there are  |  " +
+           countPreps(s) + " prepositions of place");
+    return L.join("\n");
+  }
+  function fileName(){
+    var who = (el("fName").value || "student").trim()
+      .replace(/[^A-Za-z0-9؀-ۿ -]/g, "").replace(/\s+/g, "-");
+    return "MyTown-Plan-" + (who || "student") + ".txt";
+  }
+
+  el("dlBtn").addEventListener("click", function(){
+    if(!el("fTown").value.trim() && !notes.value.trim()){
+      say("Fill in some of your plan first, then download it.", true); return;
+    }
+    save(true);
+    try{
+      var blob = new Blob([buildText()], {type:"text/plain;charset=utf-8"});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = fileName();
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+      say("Downloaded as " + fileName());
+    }catch(e){
+      say("Download did not work on this browser. Use Share my plan instead.", true);
+    }
+  });
+
+  function copyFallback(text){
+    var ok = false;
+    try{
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.position = "fixed"; ta.style.top = "-1000px";
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+    }catch(e){ ok = false; }
+    if(ok) say("Copied. Now open Google Classroom and paste it in.");
+    else say("Could not copy here. Please select your text and copy it by hand.", true);
+  }
+
+  el("shareBtn").addEventListener("click", function(){
+    if(!el("fTown").value.trim() && !notes.value.trim()){
+      say("Fill in some of your plan first, then share it.", true); return;
+    }
+    save(true);
+    var text = buildText();
+    if(navigator.share){
+      navigator.share({ title:"My Town - project plan", text:text })
+        .then(function(){ say("Shared. Well done!"); })
+        .catch(function(err){
+          if(err && err.name === "AbortError"){ say("Sharing cancelled."); }
+          else { copyFallback(text); }
+        });
+      return;
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text)
+        .then(function(){ say("Copied. Now open Google Classroom and paste it in."); })
+        .catch(function(){ copyFallback(text); });
+      return;
+    }
+    copyFallback(text);
+  });
+
+  el("clearBtn").addEventListener("click", function(){
+    if(!window.confirm("Clear your whole plan? It will be deleted.")) return;
+    IDS.forEach(function(k){ el(k).value = ""; });
+    notes.value = ""; pick("");
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    grow(); refresh();
+    say("Cleared. You can start again.");
+  });
+
+  window.addEventListener("beforeprint", function(){
+    el("notesPrint").textContent = notes.value || " ";
+  });
+
+  restore(); grow(); refresh();
+})();
+</script>
+</body>
+</html>
