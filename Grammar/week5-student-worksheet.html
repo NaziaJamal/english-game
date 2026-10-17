@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 Worksheet — My Town</title>
+<style>
+  :root{
+    --teal:#0d6e6e; --teal-deep:#094f4f; --gold:#d8a24a; --clay:#c46a4a;
+    --paper:#faf7f2; --ink:#1f2a2e; --muted:#5f6b6b; --line:#e6ded2;
+    --green:#2c6e49; --purple:#6d4c7d; --card:#ffffff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Georgia,"Times New Roman",serif; background:var(--paper); color:var(--ink);
+    line-height:1.65; padding:0 18px 70px;}
+  .sheet{max-width:840px; margin:0 auto;}
+
+  header{padding:34px 0 16px; border-bottom:3px solid var(--gold); margin-bottom:10px;}
+  .program{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.72rem; font-weight:bold;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--clay); margin-bottom:10px;}
+  h1{font-size:2.05rem; font-weight:normal; color:var(--teal-deep); line-height:1.15;}
+  .sub{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem; color:var(--muted); font-style:italic; margin-top:8px;}
+  .namebar{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; color:var(--muted);
+    padding:14px 0 22px; border-bottom:1px solid var(--line); margin-bottom:26px;}
+  .namebar input{width:220px;}
+
+  /* part header */
+  .part{display:flex; align-items:center; gap:14px; background:var(--teal); color:#fff;
+    border-radius:10px; padding:13px 20px; margin:36px 0 6px;}
+  .part .letter{font-family:Georgia,serif; font-size:1.9rem; line-height:1; opacity:.55;}
+  .part .nm{font-family:Georgia,serif; font-size:1.3rem;}
+  .part .nm small{display:block; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.8rem;
+    font-style:italic; opacity:.92; margin-top:3px;}
+  .part.b{background:var(--clay);} .part.c{background:var(--purple);}
+  .part.d{background:var(--green);} .part.e{background:var(--teal-deep);}
+
+  h3{font-size:1.06rem; font-weight:normal; color:var(--clay); margin:24px 0 4px;}
+  .instr{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; color:var(--muted);
+    font-style:italic; margin-bottom:14px;}
+  p{margin-bottom:12px;}
+
+  /* inputs that also print as blank lines */
+  input[type=text]{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:1rem; color:var(--teal-deep);
+    font-weight:bold; border:none; border-bottom:2px solid var(--teal); background:#f3efe7;
+    padding:3px 8px; border-radius:4px 4px 0 0; width:110px; text-align:center;
+  }
+  input[type=text]:focus{outline:none; background:#e9f1ef;}
+  input.wide{width:100%; text-align:left; font-weight:normal; color:var(--ink);}
+  input.mid{width:170px; text-align:left; font-weight:normal; color:var(--ink);}
+  input.tiny{width:58px;}
+
+  /* numbered question rows */
+  ol.q{list-style:none; counter-reset:q; margin:6px 0 10px;}
+  ol.q li{counter-increment:q; padding:9px 0 9px 34px; position:relative; line-height:2.1;}
+  ol.q li::before{content:counter(q) "."; position:absolute; left:2px; top:9px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-weight:bold; color:var(--teal);}
+  ol.q li .cue{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.82rem; color:var(--muted); font-style:italic;}
+
+  /* word bank */
+  .bank{border:2px solid var(--gold); border-radius:10px; padding:13px 18px; margin:12px 0 18px;
+    text-align:center; font-family:"Trebuchet MS",Arial,sans-serif;}
+  .bank .bl{font-size:.74rem; font-weight:bold; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--clay); margin-bottom:7px;}
+  .bank .words{font-size:1.05rem; color:var(--teal-deep); font-weight:bold; line-height:1.9;}
+
+  /* map */
+  figure.map{margin:14px 0 18px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:14px;}
+  figure.map svg{width:100%; height:auto; display:block;}
+  figure.map figcaption{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.82rem;
+    color:var(--muted); text-align:center; margin-top:8px; font-style:italic;}
+
+  table{width:100%; border-collapse:collapse; margin:12px 0 16px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem;}
+  th{background:var(--teal); color:#fff; text-align:left; font-weight:bold; padding:9px 12px; border:1px solid var(--teal);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:middle;}
+  tbody tr:nth-child(odd) td{background:#f6f1e9;}
+  tbody tr:nth-child(even) td{background:#fff;}
+  td.n{font-weight:bold; color:var(--teal-deep); width:46px; text-align:center;}
+
+  /* true / false rows */
+  .tf{margin:10px 0 16px;}
+  .tf .row{display:flex; gap:12px; align-items:baseline; padding:9px 0; border-bottom:1px dashed var(--line); flex-wrap:wrap;}
+  .tf .row:last-child{border-bottom:none;}
+  .tf .n{font-family:"Trebuchet MS",Arial,sans-serif; font-weight:bold; color:var(--teal); min-width:20px;}
+  .tf .st{flex:1; min-width:210px;}
+  .tf .pick{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.9rem; color:var(--muted); white-space:nowrap;}
+  .tf .fix{flex-basis:100%; padding-left:32px;}
+  .tf .fix .lb{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.82rem; color:var(--muted); font-style:italic;}
+
+  /* writing lines */
+  .lines div{border-bottom:1px solid #d9cfc0; height:34px; margin-bottom:6px;}
+
+  /* role / info-gap cards */
+  .chooser{background:#fff; border:2px dashed var(--green); border-radius:12px; padding:18px 20px;
+    margin:14px 0 16px; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.93rem;}
+  .chooser .q{font-weight:bold; color:var(--teal-deep); display:block; margin-bottom:10px; font-size:1rem;}
+  .chooser button{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.95rem; font-weight:bold;
+    padding:12px 22px; border-radius:10px; border:none; cursor:pointer; margin-right:10px;
+    min-height:44px; transition:transform .1s;
+  }
+  .chooser button:active{transform:scale(.97);}
+  .pick-a{background:var(--teal); color:#fff; box-shadow:0 3px 0 #073c3c;}
+  .pick-b{background:var(--clay); color:#fff; box-shadow:0 3px 0 #92492f;}
+  .chooser .hint{display:block; margin-top:10px; color:var(--muted); font-style:italic; font-size:.86rem;}
+
+  .gapcard{background:#fff; border:2px solid var(--line); border-radius:12px; padding:18px 20px; margin:14px 0 16px;}
+  .gapcard.a{border-color:var(--teal);} .gapcard.b{border-color:var(--clay);}
+  .gapcard .rh{font-family:"Trebuchet MS",Arial,sans-serif; font-size:.76rem; font-weight:bold;
+    letter-spacing:.12em; text-transform:uppercase; margin-bottom:4px;}
+  .gapcard.a .rh{color:var(--teal);} .gapcard.b .rh{color:var(--clay);}
+  .gapcard h4{font-family:Georgia,serif; font-size:1.2rem; font-weight:normal; color:var(--teal-deep); margin-bottom:10px;}
+  .gapcard .known{font-weight:bold; color:var(--teal-deep);}
+  .hidden{display:none !important;}
+
+  .starters{margin-top:12px; background:#f6f1e9; border-radius:8px; padding:11px 14px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.88rem; line-height:1.8;}
+  .starters b{color:var(--clay); display:block; margin-bottom:4px; font-size:.74rem;
+    letter-spacing:.1em; text-transform:uppercase;}
+
+  .box{background:#f6f1e9; border-left:4px solid var(--clay); padding:13px 18px; margin:14px 0;
+    border-radius:0 8px 8px 0; font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; line-height:1.65;}
+  .box.teal{border-left-color:var(--teal); background:#eef4f2;}
+  .box.green{border-left-color:var(--green); background:#eef4ef;}
+  .box.purple{border-left-color:var(--purple); background:#f2edf4;}
+  .box .lbl{font-weight:bold; color:var(--clay); display:block; margin-bottom:4px; letter-spacing:.03em;}
+  .box.teal .lbl{color:var(--teal);} .box.green .lbl{color:var(--green);} .box.purple .lbl{color:var(--purple);}
+
+  /* homework options */
+  .opts{display:flex; gap:14px; margin:14px 0 18px; flex-wrap:wrap;}
+  .opts div{flex:1; min-width:215px; background:#fff; border:1px solid var(--line);
+    border-left:4px solid var(--purple); border-radius:0 9px 9px 0; padding:14px 16px;
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.9rem; line-height:1.6;}
+  .opts .on{display:block; font-size:.74rem; font-weight:bold; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--purple); margin-bottom:5px;}
+
+  .closing{margin-top:34px; text-align:center; font-style:italic; color:var(--gold); font-size:1.02rem;}
+
+  /* ---------- print / save toolbar ---------- */
+  .toolbar{
+    position:sticky; top:0; z-index:30; background:var(--paper);
+    border-bottom:1px solid var(--line); padding:12px 0 11px;
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+  }
+  .toolbar button{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.92rem; font-weight:bold;
+    padding:11px 20px; border-radius:10px; border:none; cursor:pointer;
+    min-height:44px; transition:transform .1s;
+  }
+  .toolbar button:active{transform:scale(.97);}
+  .tb-print{background:var(--teal); color:#fff; box-shadow:0 3px 0 #073c3c;}
+  .tb-save{background:var(--gold); color:#3a2a10; box-shadow:0 3px 0 #a9791f;}
+  .tb-clear{background:transparent; color:var(--muted); border:2px solid var(--line)!important;}
+  .savenote{
+    font-family:"Trebuchet MS",Arial,sans-serif; font-size:.85rem; color:var(--green);
+    margin-left:4px; min-height:1.2em; flex:1; min-width:170px;
+  }
+
+  @media print{
+    body{background:#fff; padding:0; font-size:11pt;}
+    input[type=text]{background:transparent; border-bottom:1px solid #555; color:#000;}
+    .part, table, .gapcard, .box, .bank, figure.map, .opts, .tf .row{page-break-inside:avoid;}
+    .toolbar, .chooser{display:none!important;}
+    /* no role chosen yet: print both halves so a paper copy is still usable */
+    body.printboth .gapcard{display:block!important;}
+  }
+  @media(max-width:560px){
+    h1{font-size:1.6rem;}
+    .dialogue .who{min-width:0;}
+    input[type=text]{width:88px;}
+    table{font-size:.88rem; table-layout:fixed;} th,td{padding:7px 9px; overflow-wrap:anywhere;}
+    .tf .fix{padding-left:0;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header>
+  <div class="program">Free English Program &middot; Student Worksheet</div>
+  <h1>Week 5 &mdash; My Town</h1>
+  <div class="sub">there is &amp; there are &nbsp;&middot;&nbsp; prepositions of place &nbsp;&middot;&nbsp; describing a place</div>
+</header>
+
+<div class="toolbar">
+  <button type="button" class="tb-print" id="printBtn">Print or save as PDF</button>
+  <button type="button" class="tb-save" id="saveBtn">Save my answers</button>
+  <button type="button" class="tb-clear" id="clearBtn">Clear</button>
+  <span class="savenote" id="saveStatus"></span>
+</div>
+
+<div class="namebar">
+  Name: <input type="text" class="mid" aria-label="Your name">
+  &nbsp;&nbsp;&nbsp; Date: <input type="text" class="mid" aria-label="Date">
+</div>
+
+<div class="box teal">
+  <span class="lbl">How to use this page</span>
+  You can type your answers here and they save on your own phone or computer, so you will not lose
+  your work. Or print the page and write by hand. Or just use your notebook &mdash; all three are
+  fine. Nothing you type is sent anywhere.
+</div>
+
+<!-- ============ THE MAP ============ -->
+<h3 style="margin-top:30px">Our class map: Garden Street</h3>
+<p class="instr">Parts A and B are all about this street. Keep it open beside you.</p>
+
+<figure class="map">
+  <svg viewBox="0 0 760 310" role="img" aria-label="Map of Garden Street. North side, left to right: bakery, school, bank, park. South side, left to right: bus station, hospital, post office, cafe.">
+    <rect x="0" y="132" width="760" height="46" fill="#f6f1e9" stroke="#e6ded2" stroke-width="1"/>
+    <line x1="0" y1="155" x2="760" y2="155" stroke="#d8a24a" stroke-width="2" stroke-dasharray="14 12"/>
+    <rect x="283" y="140" width="194" height="30" rx="4" fill="#f6f1e9"/>
+    <text x="380" y="161" text-anchor="middle" font-family="Trebuchet MS, Arial, sans-serif"
+          font-size="15" font-weight="bold" letter-spacing="3" fill="#5f6b6b">GARDEN STREET</text>
+
+    <g font-family="Trebuchet MS, Arial, sans-serif" font-size="19" text-anchor="middle" fill="#094f4f">
+      <rect x="15"  y="22" width="175" height="96" rx="8" fill="#ffffff" stroke="#0d6e6e" stroke-width="2"/>
+      <text x="102" y="78">Bakery</text>
+      <rect x="200" y="22" width="175" height="96" rx="8" fill="#ffffff" stroke="#0d6e6e" stroke-width="2"/>
+      <text x="287" y="78">School</text>
+      <rect x="385" y="22" width="175" height="96" rx="8" fill="#ffffff" stroke="#0d6e6e" stroke-width="2"/>
+      <text x="472" y="78">Bank</text>
+      <rect x="570" y="22" width="175" height="96" rx="8" fill="#e2efe7" stroke="#2c6e49" stroke-width="2"/>
+      <text x="657" y="78" fill="#2c6e49">Park</text>
+    </g>
+
+    <g font-family="Trebuchet MS, Arial, sans-serif" font-size="19" text-anchor="middle" fill="#094f4f">
+      <rect x="15"  y="192" width="175" height="96" rx="8" fill="#ffffff" stroke="#c46a4a" stroke-width="2"/>
+      <text x="102" y="248">Bus station</text>
+      <rect x="200" y="192" width="175" height="96" rx="8" fill="#ffffff" stroke="#c46a4a" stroke-width="2"/>
+      <text x="287" y="248">Hospital</text>
+      <rect x="385" y="192" width="175" height="96" rx="8" fill="#ffffff" stroke="#c46a4a" stroke-width="2"/>
+      <text x="472" y="248">Post office</text>
+      <rect x="570" y="192" width="175" height="96" rx="8" fill="#ffffff" stroke="#c46a4a" stroke-width="2"/>
+      <text x="657" y="248">Caf&eacute;</text>
+    </g>
+
+    <text x="8" y="16" font-family="Trebuchet MS, Arial, sans-serif" font-size="11"
+          font-weight="bold" letter-spacing="2" fill="#0d6e6e">NORTH SIDE</text>
+    <text x="8" y="304" font-family="Trebuchet MS, Arial, sans-serif" font-size="11"
+          font-weight="bold" letter-spacing="2" fill="#c46a4a">SOUTH SIDE</text>
+  </svg>
+  <figcaption>Buildings on the north side face the buildings on the south side directly.</figcaption>
+</figure>
+
+<!-- ============ PART A ============ -->
+<div class="part">
+  <span class="letter">A</span>
+  <span class="nm">Controlled practice<small>Getting the forms right</small></span>
+</div>
+
+<h3>A1 &middot; is or are?</h3>
+<p class="instr">Write <b>is</b> or <b>are</b> in each gap.</p>
+<ol class="q">
+  <li>There <input type="text" class="tiny" aria-label="A1 question 1"> a park.</li>
+  <li>There <input type="text" class="tiny" aria-label="A1 question 2"> three shops.</li>
+  <li>There <input type="text" class="tiny" aria-label="A1 question 3"> a hospital.</li>
+  <li>There <input type="text" class="tiny" aria-label="A1 question 4"> two schools.</li>
+  <li>There <input type="text" class="tiny" aria-label="A1 question 5"> some water in the river.</li>
+  <li>There <input type="text" class="tiny" aria-label="A1 question 6"> a lot of people.</li>
+  <li>There <input type="text" class="tiny" aria-label="A1 question 7"> a bank, two shops and a caf&eacute;.</li>
+  <li>There <input type="text" class="tiny" aria-label="A1 question 8"> some trees in the park.</li>
+</ol>
+<div class="box">
+  <span class="lbl">Careful with number 7</span>
+  When you list several things, the verb follows the <b>first</b> one, not the whole list.
+</div>
+
+<h3>A2 &middot; Positive, negative, question</h3>
+<p class="instr">Complete each sentence. The word in brackets tells you which form you need.</p>
+<ol class="q">
+  <li>There <input type="text" aria-label="A2 question 1"> a pharmacy on this street. <span class="cue">(negative)</span></li>
+  <li><input type="text" aria-label="A2 question 2"> any shops near the park? <span class="cue">(question)</span></li>
+  <li>There <input type="text" aria-label="A2 question 3"> any buses after ten o'clock. <span class="cue">(negative)</span></li>
+  <li><input type="text" aria-label="A2 question 4"> a library in your town? <span class="cue">(question)</span></li>
+  <li>There <input type="text" aria-label="A2 question 5"> two bridges over the river. <span class="cue">(positive)</span></li>
+  <li>There <input type="text" aria-label="A2 question 6"> any traffic today. <span class="cue">(negative)</span></li>
+</ol>
+
+<h3>A3 &middot; Choose the preposition</h3>
+<p class="instr">Look at the map. Use a phrase from the box. You can use a phrase more than once.</p>
+<div class="bank">
+  <div class="bl">Word bank</div>
+  <div class="words">next to &nbsp;&middot;&nbsp; between &nbsp;&middot;&nbsp; across from &nbsp;&middot;&nbsp; at the end of &nbsp;&middot;&nbsp; on</div>
+</div>
+<ol class="q">
+  <li>The bakery is <input type="text" class="mid" aria-label="A3 question 1"> the school.</li>
+  <li>The school is <input type="text" class="mid" aria-label="A3 question 2"> the bakery and the bank.</li>
+  <li>The hospital is <input type="text" class="mid" aria-label="A3 question 3"> the school.</li>
+  <li>The park is <input type="text" class="mid" aria-label="A3 question 4"> Garden Street.</li>
+  <li>The post office is <input type="text" class="mid" aria-label="A3 question 5"> the hospital and the caf&eacute;.</li>
+  <li>The bus station is <input type="text" class="mid" aria-label="A3 question 6"> the bakery.</li>
+  <li>The caf&eacute; is <input type="text" class="mid" aria-label="A3 question 7"> the park.</li>
+  <li>All eight places are <input type="text" class="mid" aria-label="A3 question 8"> Garden Street.</li>
+</ol>
+
+<h3>A4 &middot; Answer from the map</h3>
+<p class="instr">Write a full sentence for each one.</p>
+<ol class="q">
+  <li>What is across from the bank?<br><input type="text" class="wide" aria-label="A4 question 1"></li>
+  <li>What is next to the park?<br><input type="text" class="wide" aria-label="A4 question 2"></li>
+  <li>Where is the hospital?<br><input type="text" class="wide" aria-label="A4 question 3"></li>
+  <li>Is there a library on Garden Street?<br><input type="text" class="wide" aria-label="A4 question 4"></li>
+  <li>Are there any banks?<br><input type="text" class="wide" aria-label="A4 question 5"></li>
+  <li>What is between the bakery and the bank?<br><input type="text" class="wide" aria-label="A4 question 6"></li>
+</ol>
+
+<!-- ============ PART B ============ -->
+<div class="part b">
+  <span class="letter">B</span>
+  <span class="nm">Semi-controlled practice<small>With a partner &mdash; say your answers out loud</small></span>
+</div>
+
+<h3>B1 &middot; True or false?</h3>
+<p class="instr">Write <b>T</b> or <b>F</b>. If the sentence is false, write the correct one underneath.</p>
+<div class="tf">
+  <div class="row">
+    <span class="n">1</span><span class="st">The bank is next to the park.</span>
+    <span class="pick"><input type="text" class="tiny" aria-label="B1 question 1"></span>
+    <div class="fix"><span class="lb">If false, correct it:</span> <input type="text" class="wide" aria-label="B1 correction 1"></div>
+  </div>
+  <div class="row">
+    <span class="n">2</span><span class="st">There is a library on Garden Street.</span>
+    <span class="pick"><input type="text" class="tiny" aria-label="B1 question 2"></span>
+    <div class="fix"><span class="lb">If false, correct it:</span> <input type="text" class="wide" aria-label="B1 correction 2"></div>
+  </div>
+  <div class="row">
+    <span class="n">3</span><span class="st">The caf&eacute; is across from the park.</span>
+    <span class="pick"><input type="text" class="tiny" aria-label="B1 question 3"></span>
+    <div class="fix"><span class="lb">If false, correct it:</span> <input type="text" class="wide" aria-label="B1 correction 3"></div>
+  </div>
+  <div class="row">
+    <span class="n">4</span><span class="st">There are two schools.</span>
+    <span class="pick"><input type="text" class="tiny" aria-label="B1 question 4"></span>
+    <div class="fix"><span class="lb">If false, correct it:</span> <input type="text" class="wide" aria-label="B1 correction 4"></div>
+  </div>
+  <div class="row">
+    <span class="n">5</span><span class="st">The hospital is between the bus station and the post office.</span>
+    <span class="pick"><input type="text" class="tiny" aria-label="B1 question 5"></span>
+    <div class="fix"><span class="lb">If false, correct it:</span> <input type="text" class="wide" aria-label="B1 correction 5"></div>
+  </div>
+  <div class="row">
+    <span class="n">6</span><span class="st">The bakery is at the end of the street.</span>
+    <span class="pick"><input type="text" class="tiny" aria-label="B1 question 6"></span>
+    <div class="fix"><span class="lb">If false, correct it:</span> <input type="text" class="wide" aria-label="B1 correction 6"></div>
+  </div>
+  <div class="row">
+    <span class="n">7</span><span class="st">There aren't any shops on the north side.</span>
+    <span class="pick"><input type="text" class="tiny" aria-label="B1 question 7"></span>
+    <div class="fix"><span class="lb">If false, correct it:</span> <input type="text" class="wide" aria-label="B1 correction 7"></div>
+  </div>
+  <div class="row">
+    <span class="n">8</span><span class="st">The post office is across from the bank.</span>
+    <span class="pick"><input type="text" class="tiny" aria-label="B1 question 8"></span>
+    <div class="fix"><span class="lb">If false, correct it:</span> <input type="text" class="wide" aria-label="B1 correction 8"></div>
+  </div>
+</div>
+
+<h3>B2 &middot; Complete the description</h3>
+<p class="instr">Fill the gaps, then read the whole description aloud to your partner.</p>
+<p style="line-height:2.4">
+  Welcome to Garden Street. There <input type="text" class="tiny" aria-label="B2 gap 1"> a bakery on
+  the north side, <input type="text" class="mid" aria-label="B2 gap 2"> the school. The school is
+  <input type="text" class="mid" aria-label="B2 gap 3"> the bakery and the bank. On the south side
+  there <input type="text" class="tiny" aria-label="B2 gap 4"> four places: a bus station, a
+  hospital, a post office and a caf&eacute;. The hospital is
+  <input type="text" class="mid" aria-label="B2 gap 5"> the school. The park is
+  <input type="text" class="mid" aria-label="B2 gap 6"> Garden Street, and it is a good place to sit
+  in the afternoon. There <input type="text" class="tiny" aria-label="B2 gap 7"> a library here, but
+  there is one on the next street. <input type="text" class="mid" aria-label="B2 gap 8"> a pharmacy
+  near here? No, there isn't.
+</p>
+
+<h3>B3 &middot; Write three questions</h3>
+<p class="instr">Write three questions about the map. Then ask your partner. Use
+  <b>Is there&hellip;?</b>, <b>Are there&hellip;?</b>, <b>Where is&hellip;?</b> or
+  <b>What is&hellip;?</b></p>
+<ol class="q">
+  <li><input type="text" class="wide" aria-label="B3 question 1"></li>
+  <li><input type="text" class="wide" aria-label="B3 question 2"></li>
+  <li><input type="text" class="wide" aria-label="B3 question 3"></li>
+</ol>
+
+<!-- ============ PART C ============ -->
+<div class="part c">
+  <span class="letter">C</span>
+  <span class="nm">Writing &mdash; on your own<small>Homework. Choose one of the three.</small></span>
+</div>
+
+<p class="instr">Write six to eight sentences. Use <b>there is</b> and <b>there are</b> at least
+three times, and at least two prepositions of place.</p>
+
+<div class="opts">
+  <div><span class="on">Option 1</span>
+    <b>A place you have been to.</b> Somewhere public you have visited and liked &mdash; a park, a
+    market, a library, a garden. What is there? Where are things?</div>
+  <div><span class="on">Option 2</span>
+    <b>A famous place.</b> Anywhere in the world. You do not have to have been there &mdash; you
+    can look it up, or imagine it.</div>
+  <div><span class="on">Option 3</span>
+    <b>Your perfect town.</b> Invent it. What is in it? Where is everything? What does it have
+    that no real town has?</div>
+</div>
+
+<div class="box purple">
+  <span class="lbl">All three are equally good</span>
+  Choose whichever one you want to write about. You do not need to write about the place where you
+  live, and you do not need to give anyone's address.
+</div>
+
+<div class="lines" style="margin-top:14px">
+  <div></div><div></div><div></div><div></div><div></div>
+  <div></div><div></div><div></div><div></div><div></div>
+</div>
+
+<div class="box">
+  <span class="lbl">Extra for B1+</span>
+  Add two more sentences saying what your place <b>does not</b> have, using <em>there isn't</em> or
+  <em>there aren't any</em> &mdash; and say whether you think that is a problem.
+</div>
+
+<!-- ============ PART D ============ -->
+<div class="part d">
+  <span class="letter">D</span>
+  <span class="nm">Speaking &mdash; pairs and groups<small>In class</small></span>
+</div>
+
+<h3>D1 &middot; Information gap: the town of Hilltop</h3>
+<p class="instr">Hilltop has one street with eight places on it. You know four of them. Your partner
+knows the other four. Ask and answer until you both have the whole map. <b>Do not show your
+partner your card.</b></p>
+
+<div class="chooser" id="chooser">
+  <span class="q">Which one are you today?</span>
+  <button type="button" class="pick-a" id="btnA">I am Student A</button>
+  <button type="button" class="pick-b" id="btnB">I am Student B</button>
+  <span class="hint">Your teacher will tell you. Tap a button and only your own half of the map
+  will appear.</span>
+</div>
+
+<div class="gapcard a hidden" id="cardA">
+  <div class="rh">Student A</div>
+  <h4>Your half of Hilltop</h4>
+  <table>
+    <thead><tr><th style="width:46px">#</th><th>North side</th><th style="width:46px">#</th><th>South side</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="known">Market</td>
+          <td class="n">5</td><td><input type="text" class="wide" aria-label="Hilltop A slot 5"></td></tr>
+      <tr><td class="n">2</td><td><input type="text" class="wide" aria-label="Hilltop A slot 2"></td>
+          <td class="n">6</td><td class="known">Bookshop</td></tr>
+      <tr><td class="n">3</td><td class="known">Pharmacy</td>
+          <td class="n">7</td><td><input type="text" class="wide" aria-label="Hilltop A slot 7"></td></tr>
+      <tr><td class="n">4</td><td><input type="text" class="wide" aria-label="Hilltop A slot 4"></td>
+          <td class="n">8</td><td class="known">Hotel</td></tr>
+    </tbody>
+  </table>
+  <p style="font-family:'Trebuchet MS',Arial,sans-serif; font-size:.88rem; color:var(--muted); font-style:italic; margin-bottom:0">
+    Number 1 is across from number 5, 2 from 6, 3 from 7, and 4 from 8.</p>
+  <div class="starters">
+    <b>Ask like this</b>
+    What's next to the market? &nbsp;&middot;&nbsp; Is there a hotel on the south side? &nbsp;&middot;&nbsp;
+    What's across from the bookshop? &nbsp;&middot;&nbsp; Where is the train station? &nbsp;&middot;&nbsp;
+    What's number four?
+  </div>
+</div>
+
+<div class="gapcard b hidden" id="cardB">
+  <div class="rh">Student B</div>
+  <h4>Your half of Hilltop</h4>
+  <table>
+    <thead><tr><th style="width:46px">#</th><th>North side</th><th style="width:46px">#</th><th>South side</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td><input type="text" class="wide" aria-label="Hilltop B slot 1"></td>
+          <td class="n">5</td><td class="known">Train station</td></tr>
+      <tr><td class="n">2</td><td class="known">Mosque</td>
+          <td class="n">6</td><td><input type="text" class="wide" aria-label="Hilltop B slot 6"></td></tr>
+      <tr><td class="n">3</td><td><input type="text" class="wide" aria-label="Hilltop B slot 3"></td>
+          <td class="n">7</td><td class="known">Restaurant</td></tr>
+      <tr><td class="n">4</td><td class="known">Sports center</td>
+          <td class="n">8</td><td><input type="text" class="wide" aria-label="Hilltop B slot 8"></td></tr>
+    </tbody>
+  </table>
+  <p style="font-family:'Trebuchet MS',Arial,sans-serif; font-size:.88rem; color:var(--muted); font-style:italic; margin-bottom:0">
+    Number 1 is across from number 5, 2 from 6, 3 from 7, and 4 from 8.</p>
+  <div class="starters">
+    <b>Ask like this</b>
+    What's next to the train station? &nbsp;&middot;&nbsp; Is there a market on the north side? &nbsp;&middot;&nbsp;
+    What's across from the mosque? &nbsp;&middot;&nbsp; Where is the hotel? &nbsp;&middot;&nbsp;
+    What's number six?
+  </div>
+</div>
+
+<div class="box green">
+  <span class="lbl">When you have finished</span>
+  Compare your two maps. Do they match? If something is different, do not show each other &mdash;
+  ask again in English until you agree.
+</div>
+
+<h3>D2 &middot; Build your own town</h3>
+<p class="instr">In your group, invent a town together. Fill in the table. Everyone writes it down,
+because anyone might be asked to describe it to the class.</p>
+
+<p>Our town is called <input type="text" class="mid" aria-label="Town name">.</p>
+
+<table>
+  <thead><tr><th style="width:46px">#</th><th style="width:38%">Place</th><th>Where is it?</th></tr></thead>
+  <tbody>
+    <tr><td class="n">1</td><td><input type="text" class="wide" aria-label="Town place 1"></td><td><input type="text" class="wide" aria-label="Town location 1"></td></tr>
+    <tr><td class="n">2</td><td><input type="text" class="wide" aria-label="Town place 2"></td><td><input type="text" class="wide" aria-label="Town location 2"></td></tr>
+    <tr><td class="n">3</td><td><input type="text" class="wide" aria-label="Town place 3"></td><td><input type="text" class="wide" aria-label="Town location 3"></td></tr>
+    <tr><td class="n">4</td><td><input type="text" class="wide" aria-label="Town place 4"></td><td><input type="text" class="wide" aria-label="Town location 4"></td></tr>
+    <tr><td class="n">5</td><td><input type="text" class="wide" aria-label="Town place 5"></td><td><input type="text" class="wide" aria-label="Town location 5"></td></tr>
+    <tr><td class="n">6</td><td><input type="text" class="wide" aria-label="Town place 6"></td><td><input type="text" class="wide" aria-label="Town location 6"></td></tr>
+    <tr><td class="n">7</td><td><input type="text" class="wide" aria-label="Town place 7"></td><td><input type="text" class="wide" aria-label="Town location 7"></td></tr>
+    <tr><td class="n">8</td><td><input type="text" class="wide" aria-label="Town place 8"></td><td><input type="text" class="wide" aria-label="Town location 8"></td></tr>
+  </tbody>
+</table>
+
+<p>One thing our town has that no other town has:<br>
+<input type="text" class="wide" aria-label="Unique thing about our town"></p>
+
+<div class="starters" style="margin-top:16px">
+  <b>Useful phrases for your group</b>
+  In our town there is&hellip; &nbsp;&middot;&nbsp; There are two&hellip; &nbsp;&middot;&nbsp;
+  It's next to&hellip; &nbsp;&middot;&nbsp; It's across from&hellip; &nbsp;&middot;&nbsp;
+  It's at the end of&hellip; &nbsp;&middot;&nbsp; There isn't any&hellip; &nbsp;&middot;&nbsp;
+  What do you think? &nbsp;&middot;&nbsp; Where should we put the&hellip;?
+</div>
+
+<div class="box">
+  <span class="lbl">While you listen to the other groups</span>
+  Choose one group and prepare <b>one question</b> to ask them about their town.
+  <br>My question: <input type="text" class="wide" aria-label="My question for another group">
+</div>
+
+<!-- ============ PART E ============ -->
+<div class="part e">
+  <span class="letter">E</span>
+  <span class="nm">Class discussion<small>Everyone together</small></span>
+</div>
+
+<p class="instr">There are no right answers here. Say what you think, and listen for a reason you
+had not thought of.</p>
+
+<ol class="q">
+  <li>What makes a town a good place to live?</li>
+  <li>Is it better to live in a big city or a small town? Why?</li>
+  <li>If you could add one thing to any town in the world, what would it be?</li>
+  <li>Is there a place you would like to visit one day? What do you think is there?</li>
+</ol>
+
+<div class="box teal">
+  <span class="lbl">One note I heard today that I want to remember</span>
+  <input type="text" class="wide" aria-label="Something I want to remember">
+</div>
+
+<p class="closing">&ldquo;Little by little, a little becomes a lot.&rdquo;</p>
+
+</div>
+
+<script>
+/* Saves the student's answers on their own device. Nothing is sent anywhere. */
+(function(){
+  var KEY = "week5-my-town-worksheet";
+  var ROLE = "week5-my-town-role";
+  var fields = Array.prototype.slice.call(document.querySelectorAll('input[type=text]'));
+  var statusEl = document.getElementById('saveStatus');
+  var timer = null;
+
+  fields.forEach(function(el, i){ el.setAttribute('data-k', 'f' + i); });
+
+  function say(msg, warn){
+    if(!statusEl) return;
+    statusEl.textContent = msg;
+    statusEl.style.color = warn ? '#c46a4a' : '#2c6e49';
+  }
+
+  function save(auto){
+    try{
+      var data = {};
+      fields.forEach(function(el){ if(el.value.trim()) data[el.getAttribute('data-k')] = el.value; });
+      localStorage.setItem(KEY, JSON.stringify(data));
+      say(auto ? "Saved automatically." : "Saved on this device.");
+      return true;
+    }catch(e){
+      say("This browser cannot save. Please print your page or write your answers in your notebook.", true);
+      return false;
+    }
+  }
+
+  function restore(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return;
+      var data = JSON.parse(raw), n = 0;
+      fields.forEach(function(el){
+        var v = data[el.getAttribute('data-k')];
+        if(v){ el.value = v; n++; }
+      });
+      if(n) say("Your saved answers are here. Keep going!");
+    }catch(e){ /* nothing saved yet, or storage blocked */ }
+  }
+
+  fields.forEach(function(el){
+    el.addEventListener('input', function(){
+      clearTimeout(timer);
+      timer = setTimeout(function(){ save(true); }, 700);
+    });
+  });
+
+  document.getElementById('saveBtn').addEventListener('click', function(){ save(false); });
+
+  document.getElementById('printBtn').addEventListener('click', function(){
+    save(true);
+    window.print();
+  });
+
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    if(!window.confirm("Clear all your answers on this page?")) return;
+    fields.forEach(function(el){ el.value = ""; });
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    say("Cleared. You can start again.");
+  });
+
+  /* ----- D1: show only your own half of the Hilltop map ----- */
+  var cardA = document.getElementById('cardA');
+  var cardB = document.getElementById('cardB');
+  var hint  = document.querySelector('#chooser .hint');
+  var role  = null;
+
+  /* If nobody has chosen A or B, a printed copy should still carry both halves. */
+  function markPrint(){ document.body.classList.toggle('printboth', !role); }
+  window.addEventListener('beforeprint', markPrint);
+  markPrint();
+
+  function setRole(r, remember){
+    role = r;
+    markPrint();
+    cardA.classList.toggle('hidden', r !== 'A');
+    cardB.classList.toggle('hidden', r !== 'B');
+    if(hint){
+      hint.textContent = "You are Student " + r +
+        ". Tap the other button if your teacher gives you the other role.";
+    }
+    if(remember){ try{ localStorage.setItem(ROLE, r); }catch(e){} }
+  }
+
+  document.getElementById('btnA').addEventListener('click', function(){ setRole('A', true); });
+  document.getElementById('btnB').addEventListener('click', function(){ setRole('B', true); });
+
+  try{
+    var saved = localStorage.getItem(ROLE);
+    if(saved === 'A' || saved === 'B') setRole(saved, false);
+  }catch(e){ /* storage blocked: both cards stay hidden until a button is tapped */ }
+
+  restore();
+})();
+</script>
+</body>
+</html>
